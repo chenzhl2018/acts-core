@@ -23,8 +23,8 @@
       "geo-tgeo-itk-module-split": false,
       "geo-tgeo-layer-r-ranges": {
         "central": {
-          "lower": 568,
-          "upper": 1070
+          "lower": 560,
+          "upper": 1080
         },
         "negative": {
           "lower": 0.0,
