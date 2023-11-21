@@ -18,6 +18,7 @@
 #include "Acts/Surfaces/PlaneSurface.hpp"
 #include "Acts/Surfaces/RadialBounds.hpp"
 #include "Acts/Surfaces/RectangleBounds.hpp"
+#include "Acts/Surfaces/LineBounds.hpp"
 #include "Acts/Surfaces/Surface.hpp"
 #include "Acts/Surfaces/TrapezoidBounds.hpp"
 #include "Acts/Utilities/Helpers.hpp"
@@ -82,6 +83,7 @@ Acts::TGeoSurfaceConverter::cylinderComponents(const TGeoShape& tgShape,
 
     double minR = tube->GetRmin() * scalor;
     double maxR = tube->GetRmax() * scalor;
+    std::cout<<"cylinder: minR =" <<minR <<", maxR "<< maxR<< std::endl; 
     double deltaR = maxR - minR;
     double medR = 0.5 * (minR + maxR);
     double halfZ = tube->GetDz() * scalor;
@@ -112,6 +114,60 @@ Acts::TGeoSurfaceConverter::cylinderComponents(const TGeoShape& tgShape,
   }
   return {bounds, transform, thickness};
 }
+
+
+
+std::tuple<std::shared_ptr<const Acts::LineBounds>, const Acts::Transform3,
+           double>
+Acts::TGeoSurfaceConverter::lineComponents(const TGeoShape& tgShape,
+                                               const Double_t* rotation,
+                                               const Double_t* translation,
+                                               const std::string& axes,
+                                               double scalor) noexcept(false) {
+  std::shared_ptr<const LineBounds> bounds = nullptr;
+  Transform3 transform = Transform3::Identity();
+  double thickness = 0.;
+
+  // Check if it's a tube (segment)
+  auto tube = dynamic_cast<const TGeoTube*>(&tgShape);
+  if (tube != nullptr) {
+    if (!boost::istarts_with(axes, "XY") && !boost::istarts_with(axes, "YX")) {
+      throw std::invalid_argument(
+          "TGeoShape -> LineSurface (full): can only be converted with "
+          "'(x/X)(y/Y)(*)' or '(y/Y)(x/X)(*) axes.");
+    }
+
+    // The sign of the axes
+    int xs = std::islower(axes.at(0)) != 0 ? -1 : 1;
+    int ys = std::islower(axes.at(1)) != 0 ? -1 : 1;
+
+    // Create translation and rotation
+    Vector3 t(scalor * translation[0], scalor * translation[1],
+              scalor * translation[2]);
+    bool flipxy = !boost::istarts_with(axes, "X");
+    Vector3 ax = flipxy ? xs * Vector3(rotation[1], rotation[4], rotation[7])
+                        : xs * Vector3(rotation[0], rotation[3], rotation[6]);
+    Vector3 ay = flipxy ? ys * Vector3(rotation[0], rotation[3], rotation[6])
+                        : ys * Vector3(rotation[1], rotation[4], rotation[7]);
+    Vector3 az = ax.cross(ay);
+
+    double minR = tube->GetRmin() * scalor;
+    double maxR = tube->GetRmax() * scalor;
+    double deltaR = maxR - minR;
+    double medR = 0.5 * (minR + maxR);
+    double halfZ = tube->GetDz() * scalor;
+    if (halfZ > deltaR) {
+      transform = TGeoPrimitivesHelper::makeTransform(ax, ay, az, t);
+      //TODO: This is currently hardcoded 
+      if(maxR<4){ 
+        bounds = std::make_shared<LineBounds>(deltaR/2, halfZ);
+      } 
+      thickness = deltaR;
+    }
+  }
+  return {bounds, transform, thickness};
+}
+
 
 std::tuple<std::shared_ptr<const Acts::DiscBounds>, const Acts::Transform3,
            double>

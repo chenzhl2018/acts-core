@@ -25,6 +25,7 @@ namespace Acts {
 class CylinderBounds;
 class DiscBounds;
 class PlanarBounds;
+class LineBounds;
 class Surface;
 class TGeoDetectorElement;
 
@@ -44,6 +45,23 @@ struct TGeoSurfaceConverter {
   cylinderComponents(const TGeoShape& tgShape, const Double_t* rotation,
                      const Double_t* translation, const std::string& axes,
                      double scalor = 10.) noexcept(false);
+
+ 
+  /// Convert a TGeoShape into line surface components
+  ///
+  /// @param tgShape The TGeoShape
+  /// @param rotation The rotation matrix as Double_t* from root
+  /// @param translation The translation vector as Double_t* from root
+  /// @param axes The axes definition
+  /// @param scalor The unit scalor between TGeo and Acts
+  ///
+  /// @return tuple of DiscBounds, Transform, thickness
+  static std::tuple<std::shared_ptr<const LineBounds>, const Transform3,
+                    double>
+  lineComponents(const TGeoShape& tgShape, const Double_t* rotation,
+                     const Double_t* translation, const std::string& axes,
+                     double scalor = 10.) noexcept(false);
+
 
   /// Convert a TGeoShape into disk surface components
   ///

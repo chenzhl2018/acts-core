@@ -47,13 +47,26 @@ Acts::TGeoDetectorElement::TGeoDetectorElement(
   auto tgShape = sensor->GetShape();
 
   auto [cBounds, cTransform, cThickness] =
-      TGeoSurfaceConverter::cylinderComponents(*tgShape, rotation, translation,
+      TGeoSurfaceConverter::lineComponents(*tgShape, rotation, translation,
                                                axes, scalor);
   if (cBounds != nullptr) {
     m_transform = cTransform;
     m_bounds = cBounds;
     m_thickness = cThickness;
-    m_surface = Surface::makeShared<CylinderSurface>(cBounds, *this);
+    m_surface = Surface::makeShared<StrawSurface>(cBounds, *this);
+  }
+
+  // Check next if you do not have a surface
+  if (m_surface == nullptr) {
+    auto [cBounds, cTransform, cThickness] =
+        TGeoSurfaceConverter::cylinderComponents(*tgShape, rotation, translation,
+                                                 axes, scalor);
+    if (cBounds != nullptr) {
+      m_transform = cTransform;
+      m_bounds = cBounds;
+      m_thickness = cThickness;
+      m_surface = Surface::makeShared<CylinderSurface>(cBounds, *this);
+    }
   }
 
   // Check next if you do not have a surface
