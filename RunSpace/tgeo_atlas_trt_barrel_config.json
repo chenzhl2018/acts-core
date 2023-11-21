@@ -1,0 +1,104 @@
+{
+  "Volumes": [
+    {
+      "Splitters": {
+        "CylinderDisk": {
+          "geo-tgeo-cyl-nphi-segs": 100,
+          "geo-tgeo-cyl-nz-segs": 1,
+          "geo-tgeo-disc-nphi-segs": 0,
+          "geo-tgeo-disc-nr-segs": 0
+        }
+      },
+      "geo-tgeo-binning0": {
+        "central": [[-1,0]],
+        "negative": [],
+        "positive": []
+      },
+      "geo-tgeo-binning1": {
+        "central": [[-1,0]],
+        "negative": [],
+        "positive": []
+      },
+      "geo-tgeo-cyl-disc-split": false,
+      "geo-tgeo-itk-module-split": false,
+      "geo-tgeo-layer-r-ranges": {
+        "central": {
+          "lower": 568,
+          "upper": 1070
+        },
+        "negative": {
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "positive": {
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      },
+      "geo-tgeo-layer-r-split": {
+        "central": 10,
+        "negative": 0.0,
+        "positive": 0.0
+      },
+      "geo-tgeo-layer-z-ranges": {
+        "central": {
+          "lower": -1000,
+          "upper": 1000
+        },
+        "negative": {
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "positive": {
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      },
+      "geo-tgeo-layer-z-split": {
+        "central": 0.0,
+        "negative": 0.0,
+        "positive": 0.0
+      },
+      "geo-tgeo-sensitive-axes": {
+        "central": "XY",
+        "negative": "",
+        "positive": ""
+      },
+      "geo-tgeo-sensitive-names": {
+        "central": ["StrawM"],
+        "negative": [],
+        "positive": []
+      },
+      "geo-tgeo-sfbin-phi-tolerance": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "geo-tgeo-sfbin-r-tolerance": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "geo-tgeo-sfbin-z-tolerance": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "geo-tgeo-subvolume-names": {
+        "central": "TRTBarrel",
+        "negative": "",
+        "positive": ""
+      },
+      "geo-tgeo-volume-layers": {
+        "central": true,
+        "negative": false,
+        "positive": false
+      },
+      "geo-tgeo-volume-name": "TRT"
+    }
+  ],
+  "geo-tgeo-beampipe-parameters": [
+    10,
+    200.0,
+    1 
+  ],
+  "geo-tgeo-build-beampipe": true,
+  "geo-tgeo-unit-scalor": 1.0
+}
