@@ -16,6 +16,9 @@
 #include <array>
 #include <ostream>
 #include <string>
+#include <map>
+
+
 
 std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
     const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
@@ -45,6 +48,7 @@ std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
   for (auto& sf : surfaces) {
     auto sfExtent = sf->polyhedronRepresentation(gctx, 1).extent();
     sfExtent.envelope()[sorting.first] = {sorting.second, sorting.second};
+    std::cout<<"sorting.second = " << sorting.second << std::endl; 
     auto& sfCluster = findCluster(sfExtent);
     sfCluster.first.extend(sfExtent);
     sfCluster.second.push_back(sf);
@@ -64,6 +68,8 @@ std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
     const std::vector<SortingConfig>& sortings) const {
   ACTS_DEBUG("Received " << surfaces.size() << " surfaces at input.");
   std::vector<std::vector<const Surface*>> sortSurfaces = {surfaces};
+  std::cout<<"sortings size " << sortings.size() << std::endl; 
+  std::cout<<"sortSurfaces size " << sortSurfaces.size() << std::endl; 
   for (const auto& sorting : sortings) {
     ACTS_VERBOSE("-> Sorting a set of " << sortSurfaces.size() << " in "
                                         << binningValueNames()[sorting.first]);
@@ -85,6 +91,39 @@ std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
   std::vector<Acts::ProtoLayer> finalProtoLayers;
 
   for (const auto& ssurfaces : sortSurfaces) {
+    finalProtoLayers.push_back(ProtoLayer(gctx, ssurfaces));
+  }
+
+  return finalProtoLayers;
+}
+
+std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
+    const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
+    const SortingConfig& sorting, ActsScalar minR) const {
+
+  ACTS_DEBUG("Received " << surfaces.size() << " surfaces at input.");
+  ACTS_VERBOSE("-> Sorting a set of " << surfaces.size() << " in "
+                                        << binningValueNames()[sorting.first]);
+  std::map<int, std::vector<const Surface*>> subSurfaces;
+  
+  std::vector<const Surface*> sortSurfaces = surfaces;
+
+  std::sort(sortSurfaces.begin(), sortSurfaces.end(), [&](const auto& a, const auto& b) {
+       auto aR = std::hypot(a->center(gctx).x(), a->center(gctx).y());    
+       auto bR = std::hypot(b->center(gctx).x(), b->center(gctx).y());    
+       return  aR < bR ;
+  });
+  for(const auto sf : sortSurfaces){
+     auto radius = std::hypot(sf->center(gctx).x(), sf->center(gctx).y());
+     int bin = (radius-minR)/sorting.second; 
+     subSurfaces[bin].push_back(sf); 
+  } 
+     
+  ACTS_DEBUG("Yielded " << subSurfaces.size() << " at output.");
+
+  std::vector<Acts::ProtoLayer> finalProtoLayers;
+
+  for (const auto& [i, ssurfaces] : subSurfaces) {
     finalProtoLayers.push_back(ProtoLayer(gctx, ssurfaces));
   }
 

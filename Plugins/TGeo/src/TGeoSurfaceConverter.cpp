@@ -158,9 +158,9 @@ Acts::TGeoSurfaceConverter::lineComponents(const TGeoShape& tgShape,
     double halfZ = tube->GetDz() * scalor;
     if (halfZ > deltaR) {
       transform = TGeoPrimitivesHelper::makeTransform(ax, ay, az, t);
-      //TODO: This is currently hardcoded 
+      //TODO: This criteria and the thickness is currently hardcoded 
       if(maxR<4){ 
-        bounds = std::make_shared<LineBounds>(deltaR/2, halfZ);
+        bounds = std::make_shared<LineBounds>(10, halfZ);
       } 
       thickness = deltaR;
     }

@@ -9,13 +9,12 @@
 #include "Acts/Geometry/ProtoLayer.hpp"
 
 #include "Acts/Definitions/Algebra.hpp"
+#include "Acts/Geometry/DetectorElementBase.hpp"
 #include "Acts/Geometry/Polyhedron.hpp"
 #include "Acts/Utilities/Helpers.hpp"
+#include "Acts/Surfaces/DiscTrapezoidBounds.hpp"
 
-#include <algorithm>
-#include <array>
-#include <string>
-#include <utility>
+#include <cmath>
 
 using Acts::VectorHelpers::perp;
 using Acts::VectorHelpers::phi;
@@ -50,22 +49,40 @@ double ProtoLayer::max(BinningValue bval, bool addenv) const {
 }
 
 double ProtoLayer::medium(BinningValue bval, bool addenv) const {
+  if(not m_surfaces.empty()){ 
+    if (bval == binR and m_surfaces[0]->type() == Surface::Straw) {
+      return (m_rMin + m_rMax) / 2;
+    }
+  }
   return 0.5 * (min(bval, addenv) + max(bval, addenv));
 }
 
 double ProtoLayer::range(BinningValue bval, bool addenv) const {
+  if(not m_surfaces.empty()){ 
+    if (bval == binR and m_surfaces[0]->type() == Surface::Straw) {
+      return 1;
+    }
+  }
   return std::abs(max(bval, addenv) - min(bval, addenv));
 }
 
 std::ostream& ProtoLayer::toStream(std::ostream& sl) const {
   sl << "ProtoLayer with dimensions (min/max)" << std::endl;
-  sl << extent.toString();
+  sl << extent.toString(); 
   return sl;
 }
 
 void ProtoLayer::measure(const GeometryContext& gctx,
                          const std::vector<const Surface*>& surfaces) {
   for (const auto& sf : surfaces) {
+    Vector3 center = sf->center(gctx);
+    ActsScalar radius = std::hypot(center.x(), center.y());
+    if (radius < m_rMin) {
+      m_rMin = radius;
+    }
+    if (radius > m_rMax) {
+      m_rMax = radius;
+    }
     auto sfPolyhedron = sf->polyhedronRepresentation(gctx, 1);
     const DetectorElementBase* element = sf->associatedDetectorElement();
     if (element != nullptr) {

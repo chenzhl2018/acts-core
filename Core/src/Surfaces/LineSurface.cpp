@@ -132,10 +132,12 @@ Acts::Vector3 Acts::LineSurface::binningPosition(
   return center(gctx);
 }
 
-Acts::Vector3 Acts::LineSurface::normal(const GeometryContext& /*gctx*/,
+Acts::Vector3 Acts::LineSurface::normal(const GeometryContext& gctx,
                                         const Vector2& /*lpos*/) const {
-  throw std::runtime_error(
-      "LineSurface: normal is undefined without known direction");
+  const auto& tMatrix = transform(gctx).matrix();
+  return Vector3(tMatrix(0, 2), tMatrix(1, 2), tMatrix(2, 2));
+  //throw std::runtime_error(
+  //    "LineSurface: normal is undefined without known direction");
 }
 
 const Acts::SurfaceBounds& Acts::LineSurface::bounds() const {

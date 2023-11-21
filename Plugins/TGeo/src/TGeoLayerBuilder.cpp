@@ -255,10 +255,14 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
       }
 
       ACTS_DEBUG("- created TGeoDetectorElements : " << layerSurfaces.size());
+      if(m_cfg.protoLayerHelper != nullptr) ACTS_DEBUG("protoLayerHelper not null");
+      if(!layerCfg.splitConfigs.empty()) ACTS_DEBUG("layer splitConfigs not empty");
 
       if (m_cfg.protoLayerHelper != nullptr && !layerCfg.splitConfigs.empty()) {
         auto protoLayers = m_cfg.protoLayerHelper->protoLayers(
-            gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs);
+            //gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs);
+            gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], 560);
+	std::cout <<" splitting into " << protoLayers.size() << " layers." << std::endl;
         ACTS_DEBUG("- splitting into " << protoLayers.size() << " layers.");
 
         // Number of options mismatch and has not been configured for

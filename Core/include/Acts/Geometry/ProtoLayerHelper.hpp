@@ -68,6 +68,18 @@ class ProtoLayerHelper {
       const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
       const std::vector<SortingConfig>& sortings) const;
 
+  /// Sort the surfaces into ProtoLayers, sequential sorting
+  ///
+  /// @param gctx The geometry context (usually building context at this stage)
+  /// @param surfaces The surfaces to be sorted into arrays
+  /// @param sortings The sequential sorting setup
+  ///
+  /// @return A vector of ProtoLayers
+  std::vector<Acts::ProtoLayer> protoLayers(
+    const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
+    const SortingConfig& sorting, ActsScalar minR) const;
+
+
  private:
   /// Logging instance
   std::unique_ptr<const Logger> m_logger;

@@ -97,6 +97,9 @@ struct ProtoLayer {
   void measure(const GeometryContext& gctx,
                const std::vector<const Surface*>& surfaces);
 
+  ActsScalar m_rMin = std::numeric_limits<double>::max();
+  ActsScalar m_rMax = std::numeric_limits<double>::min();
+
   /// Store the list of surfaces used for this proto layer
   std::vector<const Surface*> m_surfaces = {};
 };
