@@ -35,6 +35,11 @@ ProtoLayer::ProtoLayer(
 }
 
 double ProtoLayer::min(BinningValue bval, bool addenv) const {
+  if(not m_surfaces.empty()){ 
+    if (bval == binR and m_surfaces[0]->type() == Surface::Straw) {
+      return m_rMin;
+    }
+  }  
   if (addenv) {
     return extent.min(bval) - envelope[bval][0u];
   }
@@ -42,6 +47,11 @@ double ProtoLayer::min(BinningValue bval, bool addenv) const {
 }
 
 double ProtoLayer::max(BinningValue bval, bool addenv) const {
+  if(not m_surfaces.empty()){ 
+    if (bval == binR and m_surfaces[0]->type() == Surface::Straw) {
+      return m_rMax;
+    }
+  }
   if (addenv) {
     return extent.max(bval) + envelope[bval][1u];
   }
@@ -60,6 +70,7 @@ double ProtoLayer::medium(BinningValue bval, bool addenv) const {
 double ProtoLayer::range(BinningValue bval, bool addenv) const {
   if(not m_surfaces.empty()){ 
     if (bval == binR and m_surfaces[0]->type() == Surface::Straw) {
+      return std::abs(m_rMin - m_rMax);
       return 1;
     }
   }
@@ -77,6 +88,8 @@ void ProtoLayer::measure(const GeometryContext& gctx,
   for (const auto& sf : surfaces) {
     Vector3 center = sf->center(gctx);
     ActsScalar radius = std::hypot(center.x(), center.y());
+    // std::cout<<"m_rMin: " << m_rMin <<std::endl;
+    // std::cout<<"m_rMax: " << m_rMax <<std::endl;
     if (radius < m_rMin) {
       m_rMin = radius;
     }
