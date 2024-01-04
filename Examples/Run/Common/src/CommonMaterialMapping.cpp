@@ -152,31 +152,6 @@ int runMaterialMapping(int argc, char* argv[],
   // Get the file name from the options
   std::string materialFileName = vm["mat-output-file"].as<std::string>();
 
-  if (not materialFileName.empty() and vm["output-root"].template as<bool>()) {
-    // The writer of the indexed material
-    ActsExamples::RootMaterialWriter::Config rmwConfig;
-    rmwConfig.filePath = materialFileName + ".root";
-    // Fulfill the IMaterialWriter interface
-
-    auto rmw =
-        std::make_shared<ActsExamples::RootMaterialWriter>(rmwConfig, logLevel);
-    mmAlgConfig.materialWriters.push_back(rmw);
-
-    if (mapSurface) {
-      // Write the propagation steps as ROOT TTree
-      ActsExamples::RootMaterialTrackWriter::Config matTrackWriterRootConfig;
-      matTrackWriterRootConfig.filePath = materialFileName + "_tracks.root";
-      matTrackWriterRootConfig.collection =
-          mmAlgConfig.mappingMaterialCollection;
-      matTrackWriterRootConfig.storeSurface = true;
-      matTrackWriterRootConfig.storeVolume = true;
-      auto matTrackWriterRoot =
-          std::make_shared<ActsExamples::RootMaterialTrackWriter>(
-              matTrackWriterRootConfig, logLevel);
-      sequencer.addWriter(matTrackWriterRoot);
-    }
-  }
-
   if (!materialFileName.empty() and (vm["output-json"].template as<bool>() or
                                      vm["output-cbor"].template as<bool>())) {
     /// The name of the output file
@@ -209,16 +184,45 @@ int runMaterialMapping(int argc, char* argv[],
     jmWriterCfg.writeFormat = format;
 
     auto jmw = std::make_shared<ActsExamples::JsonMaterialWriter>(
-        std::move(jmWriterCfg), Acts::Logging::INFO);
+        std::move(jmWriterCfg), Acts::Logging::VERBOSE);
 
     mmAlgConfig.materialWriters.push_back(jmw);
   }
+
+  // The writer of the indexed material
+  ActsExamples::RootMaterialWriter::Config rmwConfig;
+  rmwConfig.filePath = materialFileName + ".root";
+  // Fulfill the IMaterialWriter interface
+
+  auto rmw =
+      std::make_shared<ActsExamples::RootMaterialWriter>(rmwConfig, logLevel);
+  mmAlgConfig.materialWriters.push_back(rmw);
 
   // Create the material mapping
   auto mmAlg = std::make_shared<ActsExamples::MaterialMapping>(mmAlgConfig);
 
   // Append the Algorithm
   sequencer.addAlgorithm(mmAlg);
+
+
+  if (not materialFileName.empty() and vm["output-root"].template as<bool>()) {
+
+    if (mapSurface) {
+      // Write the propagation steps as ROOT TTree
+      ActsExamples::RootMaterialTrackWriter::Config matTrackWriterRootConfig;
+      matTrackWriterRootConfig.filePath = materialFileName + "_tracks.root";
+      matTrackWriterRootConfig.collection =
+          mmAlgConfig.mappingMaterialCollection;
+      matTrackWriterRootConfig.storeSurface = true;
+      matTrackWriterRootConfig.storeVolume = true;
+      auto matTrackWriterRoot =
+          std::make_shared<ActsExamples::RootMaterialTrackWriter>(
+              matTrackWriterRootConfig, logLevel);
+      sequencer.addWriter(matTrackWriterRoot);
+    }
+  }
+
+
 
   // Initiate the run
   sequencer.run();
