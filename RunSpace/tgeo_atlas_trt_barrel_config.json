@@ -23,7 +23,7 @@
       "geo-tgeo-itk-module-split": false,
       "geo-tgeo-layer-r-ranges": {
         "central": {
-          "lower": 560,
+          "lower": 565,
           "upper": 1080
         },
         "negative": {
@@ -42,8 +42,8 @@
       },
       "geo-tgeo-layer-z-ranges": {
         "central": {
-          "lower": -1000,
-          "upper": 1000
+          "lower": -720,
+          "upper": 720
         },
         "negative": {
           "lower": 0.0,
@@ -95,10 +95,15 @@
     }
   ],
   "geo-tgeo-beampipe-parameters": [
-    10,
-    200.0,
-    1 
+    560,
+    720.0,
+    0.8
   ],
   "geo-tgeo-build-beampipe": true,
   "geo-tgeo-unit-scalor": 1.0
 }
+  // [
+  //   10,
+  //   200.0,
+  //   1 
+  // ],

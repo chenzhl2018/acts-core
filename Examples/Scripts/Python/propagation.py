@@ -11,7 +11,7 @@ u = acts.UnitConstants
 
 
 def runPropagation(trackingGeometry, field, outputDir, s=None, decorators=[]):
-    s = s or acts.examples.Sequencer(events=100, numThreads=1)
+    s = s or acts.examples.Sequencer(events=1, numThreads=1)
 
     for d in decorators:
         s.addContextDecorator(d)
@@ -29,10 +29,12 @@ def runPropagation(trackingGeometry, field, outputDir, s=None, decorators=[]):
 
     alg = acts.examples.PropagationAlgorithm(
         propagatorImpl=prop,
-        level=acts.logging.INFO,
+        # level=acts.logging.INFO,
+        # level=acts.logging.DEBUG,
+        level=acts.logging.VERBOSE,
         randomNumberSvc=rnd,
         ntests=1000,
-        sterileLogger=True,
+        sterileLogger=False,
         propagationStepCollection="propagation-steps",
     )
 
@@ -41,7 +43,8 @@ def runPropagation(trackingGeometry, field, outputDir, s=None, decorators=[]):
     # Output
     s.addWriter(
         acts.examples.ObjPropagationStepsWriter(
-            level=acts.logging.INFO,
+            # level=acts.logging.INFO,
+            level=acts.logging.VERBOSE,
             collection="propagation-steps",
             outputDir=outputDir + "/obj",
         )
@@ -49,7 +52,8 @@ def runPropagation(trackingGeometry, field, outputDir, s=None, decorators=[]):
 
     s.addWriter(
         acts.examples.RootPropagationStepsWriter(
-            level=acts.logging.INFO,
+            # level=acts.logging.INFO,
+            level=acts.logging.VERBOSE,
             collection="propagation-steps",
             filePath=outputDir + "/propagation_steps.root",
         )

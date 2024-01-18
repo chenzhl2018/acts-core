@@ -63,8 +63,8 @@ if "__main__" == __name__:
     # matDeco = acts.IMaterialDecorator.fromFile("material.json")
     # matDeco = acts.IMaterialDecorator.fromFile("material.root")
 
-    jsonFile="/home/xiaocong/Software/Acts/acts/RunSpace/tgeo_atlas_trt_barrel_config.json"
-    tgeo_fileName="/home/xiaocong/Software/Acts/acts/RunSpace/trt.tgeo.root"
+    jsonFile="RunSpace/tgeo_atlas_trt_barrel_config.json"
+    tgeo_fileName="../trt-tracking-geometry/trt_geometry/trt.tgeo.root"
     logLevel=acts.logging.VERBOSE
     customLogLevel = acts.examples.defaultLogging(logLevel=logLevel)
 

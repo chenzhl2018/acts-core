@@ -75,9 +75,12 @@ class ProtoLayerHelper {
   /// @param sortings The sequential sorting setup
   ///
   /// @return A vector of ProtoLayers
+  // std::vector<Acts::ProtoLayer> protoLayers(
+  //   const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
+  //   const SortingConfig& sorting, ActsScalar minR) const;
   std::vector<Acts::ProtoLayer> protoLayers(
     const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
-    const SortingConfig& sorting, ActsScalar minR) const;
+    const SortingConfig& sorting, int type) const;
 
 
  private:

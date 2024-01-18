@@ -87,15 +87,29 @@ void ProtoLayer::measure(const GeometryContext& gctx,
                          const std::vector<const Surface*>& surfaces) {
   for (const auto& sf : surfaces) {
     Vector3 center = sf->center(gctx);
-    ActsScalar radius = std::hypot(center.x(), center.y());
-    // std::cout<<"m_rMin: " << m_rMin <<std::endl;
-    // std::cout<<"m_rMax: " << m_rMax <<std::endl;
-    if (radius < m_rMin) {
-      m_rMin = radius;
+
+    // std::cout<<"1 m_rMin: " << m_rMin << std::endl;
+    // std::cout<<"1 m_rMax: " << m_rMax << std::endl;
+    // std::cout<<"1 center.z()"  << int(center.z())<< std::endl;
+    if (int(center.z()) ==0)
+    {
+      ActsScalar radius = std::hypot(center.x(), center.y());
+      // std::cout<<"2 m_rMin: " << m_rMin <<std::endl;
+      // std::cout<<"2 m_rMax: " << m_rMax <<std::endl;
+      // std::cout<<"2 center.z()"  << int(center.z())<< std::endl;
+      if (radius < m_rMin) {
+        m_rMin = radius;
+      }
+      if (radius > m_rMax) {
+        m_rMax = radius;
+      }
+    }else{
+      m_rMin = 644;
+      m_rMax = 1004;
+      
     }
-    if (radius > m_rMax) {
-      m_rMax = radius;
-    }
+    // std::cout<<int(center.x())<<"  "<<int(center.y())<<"  "<<int(center.z())<<std::endl;
+    // std::cout<<(center.x())<<"  "<<(center.y())<<"  "<<(center.z())<<std::endl;
     auto sfPolyhedron = sf->polyhedronRepresentation(gctx, 1);
     const DetectorElementBase* element = sf->associatedDetectorElement();
     if (element != nullptr) {

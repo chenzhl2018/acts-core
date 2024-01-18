@@ -54,6 +54,9 @@ Acts::TGeoDetectorElement::TGeoDetectorElement(
     m_bounds = cBounds;
     m_thickness = cThickness;
     m_surface = Surface::makeShared<StrawSurface>(cBounds, *this);
+    // double r = cBounds->get(LineBounds::eR);
+    // std::cout<<"=====r====="<<r<<std::endl;
+    // std::cout<<"====m_thickness======"<<m_thickness<<std::endl;
   }
 
   // Check next if you do not have a surface

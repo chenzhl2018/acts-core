@@ -153,6 +153,9 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
 
       pl.envelope[Acts::binR] = {lCfg.envelope.first, lCfg.envelope.second};
       pl.envelope[Acts::binZ] = {lCfg.envelope.second, lCfg.envelope.second};
+      // std::cout<<"lCfg.envelope.first"<<lCfg.envelope.first<<std::endl;
+      // std::cout<<"lCfg.envelope.second"<<lCfg.envelope.second<<std::endl;
+      
       if (nb0 >= 0 && nb1 >= 0) {
         layers.push_back(
             m_cfg.layerCreator->cylinderLayer(gctx, lSurfaces, nb0, nb1, pl));
@@ -167,6 +170,8 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
 
       pl.envelope[Acts::binR] = {lCfg.envelope.first, lCfg.envelope.second};
       pl.envelope[Acts::binZ] = {lCfg.envelope.second, lCfg.envelope.second};
+      std::cout<<"lCfg.envelope.first"<<lCfg.envelope.first<<std::endl;
+      std::cout<<"lCfg.envelope.second"<<lCfg.envelope.second<<std::endl;
       if (nb0 >= 0 && nb1 >= 0) {
         layers.push_back(
             m_cfg.layerCreator->discLayer(gctx, lSurfaces, nb0, nb1, pl));
@@ -202,8 +207,20 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
     // Either pick the configured volume or take the top level volume
     TGeoVolume* tVolume =
         gGeoManager->FindVolumeFast(layerCfg.volumeName.c_str());
+
+    // TObjArray* volumes = gGeoManager->GetListOfVolumes();
+    // for (Int_t i = 0; i < volumes->GetEntries(); ++i) {
+    //     TGeoVolume* volume = dynamic_cast<TGeoVolume*>(volumes->At(i));
+    //     if (volume) {
+    //         const char* volumeName = volume->GetName();
+    //         printf("Volume name: %s\n", volumeName);
+    //         std::cout << "Volume index: " << volume->GetNumber() << std::endl;
+    //     }
+    // }
+    std::cout<<"======layerCfg.volumeName.c_str()======"<<layerCfg.volumeName.c_str()<<std::endl;
     if (tVolume == nullptr) {
       tVolume = gGeoManager->GetTopVolume();
+      std::cout<<"=====tVolume====="<<tVolume->GetName()<<std::endl;
       ACTS_DEBUG("- search volume is TGeo top volume");
     } else {
       ACTS_DEBUG("- setting search volume to " << tVolume->GetName());
@@ -213,6 +230,9 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
       TGeoParser::Options tgpOptions;
       tgpOptions.volumeNames = {layerCfg.volumeName};
       tgpOptions.targetNames = layerCfg.sensorNames;
+      for (const auto& name : layerCfg.sensorNames) {
+        std::cout <<"=====sensor name====="<< name << std::endl;
+      }
       tgpOptions.parseRanges = layerCfg.parseRanges;
       tgpOptions.unit = m_cfg.unit;
       TGeoParser::State tgpState;
@@ -225,8 +245,21 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
                                  << " within [ " << prange.second.first << ", "
                                  << prange.second.second << "]");
       }
-
-      TGeoParser::select(tgpState, tgpOptions);
+      // const TGeoMatrix *ematrix = tVolume->GetField();
+      if(type == 0){
+        TGeoParser::select(tgpState, tgpOptions);
+      }else if(type == 1){
+        // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x10ccbc810");
+        TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x114683ff0");
+        const TGeoMatrix *ematrix = endcap->GetMatrix();
+        TGeoParser::select(tgpState, tgpOptions,*ematrix);
+      }else if(type == -1){
+        // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x10e3c6140");
+        TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x11469d650");
+        const TGeoMatrix *ematrix = endcap->GetMatrix();
+        TGeoParser::select(tgpState, tgpOptions,*ematrix);
+      }
+      
 
       ACTS_DEBUG("- number of selected nodes found : "
                  << tgpState.selectedNodes.size());
@@ -259,10 +292,22 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
       if(!layerCfg.splitConfigs.empty()) ACTS_DEBUG("layer splitConfigs not empty");
 
       if (m_cfg.protoLayerHelper != nullptr && !layerCfg.splitConfigs.empty()) {
-        auto protoLayers = m_cfg.protoLayerHelper->protoLayers(
-            //gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs);
-            gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], 560);
-	std::cout <<" splitting into " << protoLayers.size() << " layers." << std::endl;
+        std::vector<Acts::ProtoLayer> protoLayers;
+        if(type==0){
+          protoLayers = m_cfg.protoLayerHelper->protoLayers(
+              //gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs);
+              gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], type);
+          std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].first<<std::endl;
+          std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].second<<std::endl;
+        }else if(type==1 || type==-1){
+          protoLayers = m_cfg.protoLayerHelper->protoLayers(
+              gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], type);
+          // std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].first<<std::endl;
+          // std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].second<<std::endl;
+              // gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0]);
+          std::cout <<" splitting into " << protoLayers.size() << " layers." << std::endl;
+        }
+
         ACTS_DEBUG("- splitting into " << protoLayers.size() << " layers.");
 
         // Number of options mismatch and has not been configured for
@@ -290,9 +335,11 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
 
           for (const auto& lsurface : pLayer.surfaces()) {
             layerSurfaces.push_back(lsurface->getSharedPtr());
+            // std::cout<<"=====lsurface====="<<lsurface->geometryId()<<std::endl;
           }
           fillLayer(layerSurfaces, layerCfg, layer_id);
           layer_id++;
+          std::cout<<" layer_id " <<layer_id<<std::endl;
         }
       } else {
         fillLayer(layerSurfaces, layerCfg);
