@@ -19,17 +19,28 @@
 #include "TGeoVolume.h"
 #include "TObjArray.h"
 #include "TObject.h"
+#include <iostream>
 
+
+// int i=0;
 void Acts::TGeoParser::select(Acts::TGeoParser::State& state,
                               const Acts::TGeoParser::Options& options,
                               const TGeoMatrix& gmatrix) {
   // Volume is present
   if (state.volume != nullptr) {
     std::string volumeName = state.volume->GetName();
+    // i++;
+    // std::cout<<"=====i====="<<i<<std::endl;
+    // std::cout<<"=====state.volume->GetName()====="<<state.volume->GetName()<<std::endl;
+    // for(auto name : options.volumeNames){
+    //   std::cout<<"=====options.volumeNames====="<<name<<std::endl;
+    // }
+
     // If you are on branch, you stay on branch
     state.onBranch =
         state.onBranch ||
         TGeoPrimitivesHelper::match(options.volumeNames, volumeName.c_str());
+    
     // Loop over the daughters and collect them
     auto daughters = state.volume->GetNodes();
     // Daughter node iteration
@@ -39,6 +50,7 @@ void Acts::TGeoParser::select(Acts::TGeoParser::State& state,
       if (node != nullptr) {
         state.volume = nullptr;
         state.node = node;
+        // std::cout<<"=====node->GetName()====="<<node->GetName()<<std::endl;
         select(state, options, gmatrix);
       }
     }
@@ -46,18 +58,33 @@ void Acts::TGeoParser::select(Acts::TGeoParser::State& state,
     // The node name for checking
     std::string nodeName = state.node->GetName();
     std::string nodeVolName = state.node->GetVolume()->GetName();
+
+
     // Get the matrix of the current node for positioning
     const TGeoMatrix* nmatrix = state.node->GetMatrix();
     TGeoHMatrix transform = TGeoCombiTrans(gmatrix) * TGeoCombiTrans(*nmatrix);
     std::string suffix = "_transform";
     transform.SetName((nodeName + suffix).c_str());
+    // std::cout<<"transform = "<<transform.GetName()<<std::endl;
+    const Double_t* translation = transform.GetTranslation();
+    // std::cout<<"=====translation====="<<translation[0]<<" "<<translation[1]<<" "<<translation[2]<<std::endl;
     // Check if you had found the target node
+
+    // for(auto name : options.targetNames){
+    //   std::cout<<"=====target name====== "<<name<<std::endl;
+    //   std::cout<<"=====nodeName====="<<nodeName.c_str()<<std::endl;
+    //   std::cout<<"=====nodeVolName====="<<nodeVolName<<std::endl;
+    // }
     if (state.onBranch &&
         TGeoPrimitivesHelper::match(options.targetNames, nodeVolName.c_str())) {
+    // if (state.onBranch &&
+    //     TGeoPrimitivesHelper::match(options.targetNames, nodeName.c_str())) {
       // Get the placement and orientation in respect to its mother
       const Double_t* rotation = transform.GetRotationMatrix();
       const Double_t* translation = transform.GetTranslation();
-
+      // std::cout<<"=====rotation====="<<rotation[0]<<" "<<rotation[1]<<" "<<rotation[2]<<std::endl;
+      // std::cout<<"=====translation====="<<translation[0]<<" "<<translation[1]<<" "<<translation[2]<<std::endl;
+      // std::cout<<"=====nodeName====="<<nodeName.c_str()<<std::endl;
       // Create a eigen transform
       Vector3 t(options.unit * translation[0], options.unit * translation[1],
                 options.unit * translation[2]);
@@ -77,13 +104,21 @@ void Acts::TGeoParser::select(Acts::TGeoParser::State& state,
         double dy = options.unit * shape->GetDY();
         double dz = options.unit * shape->GetDZ();
         for (auto x : std::vector<double>{-dx, dx}) {
+          // std::cout<<"X"<<std::endl;
           for (auto y : std::vector<double>{-dy, dy}) {
+            // std::cout<<"Y"<<std::endl;
             for (auto z : std::vector<double>{-dz, dz}) {
               Vector3 edge = etrf * Vector3(x, y, z);
+              // std::cout<<"Z"<<std::endl;
               for (auto& check : options.parseRanges) {
                 double val = VectorHelpers::cast(edge, check.first);
+                // std::cout<<"=====nodeName====="<<nodeName.c_str()<<std::endl;
+                // std::cout <<"val"<<val << std::endl;
+                // std::cout<<"check.second.first"<<check.second.first<<std::endl;
+                // std::cout<<"check.second.second"<<check.second.second<<std::endl;
                 if (val < check.second.first || val > check.second.second) {
                   accept = false;
+
                   break;
                 }
               }
@@ -99,6 +134,7 @@ void Acts::TGeoParser::select(Acts::TGeoParser::State& state,
     } else {
       // If it's not accepted, get the associated volume
       state.volume = state.node->GetVolume();
+      // std::cout<<"=====node->GetName()====="<<state.node->GetName()<<std::endl;
       state.node = nullptr;
       // Set one further down
       select(state, options, transform);

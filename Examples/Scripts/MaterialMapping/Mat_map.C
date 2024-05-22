@@ -101,14 +101,14 @@ void Mat_map(std::string Val = "", std::string geantino = "", std::string name =
 
   TProfile * Val_X0_Eta = new TProfile("Val_X0_Eta","Val_X0_Eta",160,-4,4);
   TProfile * Val_X0_Phi = new TProfile("Val_X0_Phi","Val_X0_Phi",160,-4,4);
-  TH2F * Val_X0_Eta_spread = new TH2F("Val_X0_Eta_spread","Val_X0_Eta_spread",160,-4,4,160,0,4);
-  TH2F * Val_X0_Phi_spread = new TH2F("Val_X0_Phi_spread","Val_X0_Phi_spread",160,-4,4,160,0,4);
+  TH2F * Val_X0_Eta_spread = new TH2F("Val_X0_Eta_spread","Val_X0_Eta_spread",160,-4,4,160,0,2);
+  TH2F * Val_X0_Phi_spread = new TH2F("Val_X0_Phi_spread","Val_X0_Phi_spread",160,-4,4,160,0,2);
   TH2F * Val_X0 = new TH2F("Val_X0","Val_X0",160,-4,4,160,-4,4);
 
   TProfile * geantino_X0_Eta = new TProfile("geantino_X0_Eta","geantino_X0_Eta",160,-4,4);
   TProfile * geantino_X0_Phi = new TProfile("geantino_X0_Phi","geantino_X0_Phi",160,-4,4);
-  TH2F * geantino_X0_Eta_spread = new TH2F("geantino_X0_Eta_spread","geantino_X0_Eta_spread",160,-4,4,160,0,4);
-  TH2F * geantino_X0_Phi_spread = new TH2F("geantino_X0_Phi_spread","geantino_X0_Phi_spread",160,-4,4,160,0,4);
+  TH2F * geantino_X0_Eta_spread = new TH2F("geantino_X0_Eta_spread","geantino_X0_Eta_spread",160,-4,4,160,0,2);
+  TH2F * geantino_X0_Phi_spread = new TH2F("geantino_X0_Phi_spread","geantino_X0_Phi_spread",160,-4,4,160,0,2);
   TH2F * geantino_X0 = new TH2F("geantino_X0","geantinol_X0",160,-4,4,160,-4,4);
 
   TH1F * comp_X0_Eta = new TH1F("comp_X0_Eta","comp_X0_Eta",160,-4,4);
@@ -145,7 +145,7 @@ void Mat_map(std::string Val = "", std::string geantino = "", std::string name =
 
     // 2D map for Validation input
     TCanvas *VM = new TCanvas("VM","Validation Map") ;
-    Val_file->Draw("mat_y:mat_z","fabs(mat_x)<1");
+    Val_file->Draw("mat_x:mat_z","fabs(mat_y)<1"); 
 
     eta_0->Draw("Same");
     eta_1p->Draw("Same");
@@ -158,7 +158,6 @@ void Mat_map(std::string Val = "", std::string geantino = "", std::string name =
     eta_4n->Draw("Same");
 
     VM->Print( (name+"/Val_mat_map.png").c_str());
-    //VM->Print( (name+"/Val_mat_map.pdf").c_str());
 
     // X0 as function of Eta for Validation input
     TCanvas *VM_X0_Eta = new TCanvas("VM_X0_Eta","Validation X0 Eta") ;
@@ -198,7 +197,7 @@ void Mat_map(std::string Val = "", std::string geantino = "", std::string name =
     Val_X0->GetXaxis()->SetTitle("Eta");
     Val_X0->GetYaxis()->SetTitle("Phi");
     Val_X0->GetZaxis()->SetTitle("X0");
-    VM_2D->Print( (name+"/Val_mat_X0.png").c_str());
+    VM_2D->Print( (name+"/Val_mat_X0.png").c_str());  //VM_2D->Print( (name+"/Val_mat_X0.png").c_str());
   }
 
   if(geantino != ""){
@@ -206,7 +205,7 @@ void Mat_map(std::string Val = "", std::string geantino = "", std::string name =
 
     // 2D map for Geantino input
     TCanvas *GM = new TCanvas("GM","Geantino Map") ;
-    geantino_file->Draw("mat_y:mat_z","fabs(mat_x)<1");
+    geantino_file->Draw("mat_x:mat_z","fabs(mat_y)<1");
 
     eta_0->Draw("Same");
     eta_1p->Draw("Same");

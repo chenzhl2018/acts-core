@@ -58,7 +58,9 @@ auto Acts::Propagator<S, N>::propagate_impl(propagator_state_t& state,
       // Post-stepping:
       // navigator post step call - action list - aborter list
       m_navigator.postStep(state, m_stepper);
+      // std::cout<<"===== after m_navigator.postStep, before state.options.actionList====="<<std::endl;
       state.options.actionList(state, m_stepper, m_navigator, result, logger());
+      // std::cout<<"===== after state.options.actionList====="<<std::endl;
       if (state.options.abortList(state, m_stepper, m_navigator, result,
                                   logger())) {
         terminatedNormally = true;

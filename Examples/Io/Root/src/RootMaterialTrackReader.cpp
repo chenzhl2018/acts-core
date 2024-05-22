@@ -211,23 +211,30 @@ ActsExamples::ProcessCode ActsExamples::RootMaterialTrackReader::read(
         ACTS_VERBOSE("====================");
 
         if (m_cfg.readCachedSurfaceInformation) {
+          // std::cout<<"======m_cfg.readCachedSurfaceInformation====="<<std::endl;
           // add the surface information to the interaction this allows the
           // mapping to be speed up
           mInteraction.intersectionID =
               Acts::GeometryIdentifier((*m_sur_id)[is]);
+          // std::cout<<"=====1====="<<std::endl;
           mInteraction.intersection =
               Acts::Vector3((*m_sur_x)[is], (*m_sur_y)[is], (*m_sur_z)[is]);
           mInteraction.pathCorrection = (*m_sur_pathCorrection)[is];
+          // std::cout<<"=====2====="<<std::endl;
         } else {
           mInteraction.intersectionID = Acts::GeometryIdentifier();
           mInteraction.intersection = Acts::Vector3(0, 0, 0);
         }
         rmTrack.second.materialInteractions.push_back(std::move(mInteraction));
       }
+      // std::cout<<"=====mtrackCollection[ib]====="<<std::endl;
       mtrackCollection[ib] = (std::move(rmTrack));
     }
+    
     // Write to the collection to the EventStore
+    // ACTS_VERBOSE("====Write to the collection to the EventStore=====");
     m_outputMaterialTracks(context, std::move(mtrackCollection));
+    // std::cout<<"======m_outputMaterialTracks====="<<std::endl;
   }
   // Return success flag
   return ActsExamples::ProcessCode::SUCCESS;

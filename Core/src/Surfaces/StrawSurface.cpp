@@ -43,6 +43,8 @@ Acts::StrawSurface& Acts::StrawSurface::operator=(const StrawSurface& other) {
   if (this != &other) {
     LineSurface::operator=(other);
     m_bounds = other.m_bounds;
+    // double r = m_bounds->get(LineBounds::eR);
+    // std::cout<<"=====r====="<<r<<std::endl;
   }
   return *this;
 }
@@ -58,6 +60,7 @@ Acts::Polyhedron Acts::StrawSurface::polyhedronRepresentation(
   // Draw the bounds if more than one segment are chosen
   if (lseg > 1) {
     double r = m_bounds->get(LineBounds::eR);
+    // std::cout<<"=====r====="<<r<<std::endl;
     auto phiSegs = detail::VerticesHelper::phiSegments();
     // Write the two bows/circles on either side
     std::vector<int> sides = {-1, 1};

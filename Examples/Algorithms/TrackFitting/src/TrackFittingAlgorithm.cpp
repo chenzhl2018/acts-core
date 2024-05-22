@@ -51,12 +51,12 @@ ActsExamples::TrackFittingAlgorithm::TrackFittingAlgorithm(
   if (m_cfg.outputTracks.empty()) {
     throw std::invalid_argument("Missing output tracks collection");
   }
-  if (!m_cfg.calibrator) {
-    throw std::invalid_argument("Missing calibrator");
-  }
-  if (m_cfg.inputClusters.empty() && m_cfg.calibrator->needsClusters()) {
-    throw std::invalid_argument("The configured calibrator needs clusters");
-  }
+  // if (!m_cfg.calibrator) {
+  //   throw std::invalid_argument("Missing calibrator");
+  // }
+  // if (m_cfg.inputClusters.empty() && m_cfg.calibrator->needsClusters()) {
+  //   throw std::invalid_argument("The configured calibrator needs clusters");
+  // }
 
   m_inputMeasurements.initialize(m_cfg.inputMeasurements);
   m_inputSourceLinks.initialize(m_cfg.inputSourceLinks);

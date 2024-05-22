@@ -93,6 +93,7 @@ Acts::Result<Acts::Vector2> Acts::LineSurface::globalToLocal(
   // This check is also done for the `PlaneSurface` so I aligned the
   // `LineSurface` to do the same thing.
   if (std::abs(localPosition.z()) > std::abs(tolerance)) {
+    std::cout<<"=====LineSurface.cpp======"<<std::endl;
     return Result<Vector2>::failure(SurfaceError::GlobalPositionNotOnSurface);
   }
 

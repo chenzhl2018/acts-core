@@ -80,7 +80,7 @@ class ProtoLayerHelper {
   //   const SortingConfig& sorting, ActsScalar minR) const;
   std::vector<Acts::ProtoLayer> protoLayers(
     const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
-    const SortingConfig& sorting, int type) const;
+    const SortingConfig& sorting, int type, int minR, int minZ) const;
 
 
  private:

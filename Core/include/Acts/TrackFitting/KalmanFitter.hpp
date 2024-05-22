@@ -278,7 +278,7 @@ class KalmanFitter {
                    getDefaultLogger("KalmanFitter", Logging::INFO))
       : m_propagator(std::move(pPropagator)),
         m_logger{std::move(_logger)},
-        m_actorLogger{m_logger->cloneWithSuffix("Actor")} {}
+        m_actorLogger{m_logger->cloneWithSuffix("Actor", Logging::INFO)} {}
 
  private:
   /// The propagator for the transport and material update
@@ -390,7 +390,8 @@ class KalmanFitter {
       // - Waiting for a current surface
       auto surface = navigator.currentSurface(state.navigation);
       std::string direction = state.options.direction.toString();
-      if (surface != nullptr) {
+      // if (surface != nullptr) {
+      if (surface != nullptr and !navigator.navigationBreak(state.navigation)){
         // Check if the surface is in the measurement map
         // -> Get the measurement / calibrate
         // -> Create the predicted state
@@ -488,8 +489,10 @@ class KalmanFitter {
                                  logger())) {
           ACTS_VERBOSE("Completing with fitted track parameter");
           // Transport & bind the parameter to the final surface
+          // std::cout<<"=====before stepper.boundState====="<<std::endl;
           auto res = stepper.boundState(state.stepping, *targetSurface, true,
                                         freeToBoundCorrection);
+          // std::cout<<"=====after stepper.boundState====="<<std::endl;
           if (!res.ok()) {
             ACTS_ERROR("Error in " << direction << " filter: " << res.error());
             result.result = res.error();
@@ -617,11 +620,12 @@ class KalmanFitter {
 
         // do the kalman update (no need to perform covTransport here, hence no
         // point in performing globalToLocal correction)
+        // std::cout<<"=====before trackStateProxyRes====="<<std::endl;
         auto trackStateProxyRes = detail::kalmanHandleMeasurement(
             *calibrationContext, state, stepper, extensions, *surface,
             sourcelink_it->second, *result.fittedStates, result.lastTrackIndex,
             false, logger());
-
+        // std::cout<<"=====after trackStateProxyRes====="<<std::endl;
         if (!trackStateProxyRes.ok()) {
           return trackStateProxyRes.error();
         }

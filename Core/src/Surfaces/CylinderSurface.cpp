@@ -124,6 +124,7 @@ Acts::Result<Acts::Vector2> Acts::CylinderSurface::globalToLocal(
     // transform default value!
     // @TODO: check if s_onSurfaceTolerance would do here
     inttol = bounds().get(CylinderBounds::eR) * 0.0001;
+    // std::cout<<"=====inttol====="<<inttol<<std::endl;
   }
   if (inttol < 0.01) {
     inttol = 0.01;
@@ -132,6 +133,7 @@ Acts::Result<Acts::Vector2> Acts::CylinderSurface::globalToLocal(
   Transform3 inverseTrans(sfTransform.inverse());
   Vector3 loc3Dframe(inverseTrans * position);
   if (std::abs(perp(loc3Dframe) - bounds().get(CylinderBounds::eR)) > inttol) {
+    std::cout<<"=====CylinderSurface.cpp======"<<std::endl;
     return Result<Vector2>::failure(SurfaceError::GlobalPositionNotOnSurface);
   }
   return Result<Vector2>::success(

@@ -217,6 +217,7 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
     //         std::cout << "Volume index: " << volume->GetNumber() << std::endl;
     //     }
     // }
+
     std::cout<<"======layerCfg.volumeName.c_str()======"<<layerCfg.volumeName.c_str()<<std::endl;
     if (tVolume == nullptr) {
       tVolume = gGeoManager->GetTopVolume();
@@ -228,6 +229,7 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
 
     if (tVolume != nullptr) {
       TGeoParser::Options tgpOptions;
+      std::cout<<"=====tVolume====="<<tVolume->GetName()<<std::endl;
       tgpOptions.volumeNames = {layerCfg.volumeName};
       tgpOptions.targetNames = layerCfg.sensorNames;
       for (const auto& name : layerCfg.sensorNames) {
@@ -244,23 +246,69 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
         ACTS_VERBOSE(" - range " << binningValueNames()[prange.first]
                                  << " within [ " << prange.second.first << ", "
                                  << prange.second.second << "]");
+        if(binningValueNames()[prange.first] == "binR"){
+          minR=prange.second.first;
+          std::cout<<"=====minR===="<<minR<<std::endl;
+        }
+        if(binningValueNames()[prange.first] == "binZ"){
+          minZ=std::min(abs(prange.second.first),abs(prange.second.second));
+          std::cout<<"=====minZ===="<<minZ<<std::endl;
+        }        
       }
-      // const TGeoMatrix *ematrix = tVolume->GetField();
+
       if(type == 0){
         TGeoParser::select(tgpState, tgpOptions);
       }else if(type == 1){
-        // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x10ccbc810");
-        TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x114683ff0");
-        const TGeoMatrix *ematrix = endcap->GetMatrix();
-        TGeoParser::select(tgpState, tgpOptions,*ematrix);
-      }else if(type == -1){
+        if (layerCfg.volumeName == "TRTEndcapWheelAB"){
+          // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x10ccbc810");
+          // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x114683ff0");
+          TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x129ad9b50");
+          const TGeoMatrix *ematrix = endcap->GetMatrix();
+          TGeoParser::select(tgpState, tgpOptions,*ematrix);
+
+        }else if(layerCfg.volumeName == "SCT_ForwardA"){
+          // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("SCT0x112f7e8a0");
+          TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("SCT0x11e271950");
+          const TGeoMatrix *ematrix = endcap->GetMatrix();
+          TGeoParser::select(tgpState, tgpOptions,*ematrix);
+
+        }else if (layerCfg.volumeName == "EndCap"){
+          TGeoVolume* PVolume = gGeoManager->FindVolumeFast("Pixel");
+          TGeoNode *endcap = PVolume->FindNode("EndCapA0x11e524240");
+          const TGeoMatrix *ematrix = endcap->GetMatrix();
+          TGeoParser::select(tgpState, tgpOptions,*ematrix);
+
+        }else{
+          TGeoParser::select(tgpState, tgpOptions);
+
+        }
+
+      }else if(type == -1){      
+        if (layerCfg.volumeName == "TRTEndcapWheelAB"){
         // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x10e3c6140");
-        TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x11469d650");
-        const TGeoMatrix *ematrix = endcap->GetMatrix();
-        TGeoParser::select(tgpState, tgpOptions,*ematrix);
+        // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x11469d650");
+        TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("TRT0x12cbeb4b0");
+          const TGeoMatrix *ematrix = endcap->GetMatrix();
+          TGeoParser::select(tgpState, tgpOptions,*ematrix);
+
+        }else if(layerCfg.volumeName == "SCT_ForwardC"){
+          // TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("SCT0x112f7e8a0");
+          TGeoNode *endcap = gGeoManager->GetTopVolume()->FindNode("SCT0x11f6e52a0");
+          const TGeoMatrix *ematrix = endcap->GetMatrix();
+          TGeoParser::select(tgpState, tgpOptions,*ematrix);
+
+        }else if (layerCfg.volumeName == "EndCap"){
+          TGeoVolume* PVolume = gGeoManager->FindVolumeFast("Pixel");
+          TGeoNode *endcap = PVolume->FindNode("EndCapC0x11e577e60");
+          const TGeoMatrix *ematrix = endcap->GetMatrix();
+          TGeoParser::select(tgpState, tgpOptions,*ematrix);
+
+        }else{
+          TGeoParser::select(tgpState, tgpOptions);
+
+        }
       }
       
-
       ACTS_DEBUG("- number of selected nodes found : "
                  << tgpState.selectedNodes.size());
 
@@ -292,16 +340,18 @@ void Acts::TGeoLayerBuilder::buildLayers(const GeometryContext& gctx,
       if(!layerCfg.splitConfigs.empty()) ACTS_DEBUG("layer splitConfigs not empty");
 
       if (m_cfg.protoLayerHelper != nullptr && !layerCfg.splitConfigs.empty()) {
+        
         std::vector<Acts::ProtoLayer> protoLayers;
+
         if(type==0){
           protoLayers = m_cfg.protoLayerHelper->protoLayers(
               //gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs);
-              gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], type);
+              gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], type,minR,0);
           std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].first<<std::endl;
           std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].second<<std::endl;
         }else if(type==1 || type==-1){
           protoLayers = m_cfg.protoLayerHelper->protoLayers(
-              gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], type);
+              gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0], type, 0, minZ);
           // std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].first<<std::endl;
           // std::cout<<"layerCfg.splitConfigs[0]"<<layerCfg.splitConfigs[0].second<<std::endl;
               // gctx, unpack_shared_vector(layerSurfaces), layerCfg.splitConfigs[0]);

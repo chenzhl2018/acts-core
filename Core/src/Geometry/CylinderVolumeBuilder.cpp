@@ -114,12 +114,19 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     wConfig.existingVolumeConfig.zMax =
         existingVolume->center().z() +
         existingBounds->get(CylinderVolumeBounds::eHalfLengthZ);
+  
+    std::cout<<"wConfig.existingVolumeConfig.rMin" <<wConfig.existingVolumeConfig.rMin<<std::endl;
+    std::cout<<"wConfig.existingVolumeConfig.rMax" <<wConfig.existingVolumeConfig.rMax<<std::endl;
+    std::cout<<"wConfig.existingVolumeConfig.zMin" <<wConfig.existingVolumeConfig.zMin<<std::endl;
+    std::cout<<"wConfig.existingVolumeConfig.zMax" <<wConfig.existingVolumeConfig.zMax<<std::endl;
+
   }
   //
   // b) outside config
   // the volume config for the Outside
   VolumeConfig externalBoundConfig;
   if (externalBounds) {
+    std::cout<<"=====externalBounds====="<<std::endl;
     const CylinderVolumeBounds* ocvBounds =
         dynamic_cast<const CylinderVolumeBounds*>(externalBounds.get());
     // the cast to CylinderVolumeBounds needs to be successful
@@ -250,7 +257,10 @@ Acts::CylinderVolumeBuilder::trackingVolume(
                 wConfig.cVolumeConfig.zMin, wConfig.cVolumeConfig.zMax,
                 m_cfg.volumeName + "::Barrel")
           : nullptr;
-
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.rMin=====" <<wConfig.cVolumeConfig.rMin);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.rMan=====" <<wConfig.cVolumeConfig.rMax);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.zMin=====" <<wConfig.cVolumeConfig.zMin);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.zMax=====" <<wConfig.cVolumeConfig.zMax);
   // Helper method to check for
 
   // Helper method to create endcap volume
@@ -264,6 +274,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     // Check for ring layout
     if (m_cfg.checkRingLayout) {
       ACTS_DEBUG("Configured to check for ring layout - parsing layers.");
+      std::cout<<"=====Configured to check for ring layout - parsing layers."<<std::endl;
       // Parsing loop for ring layout
       std::vector<double> innerRadii = {};
       std::vector<double> outerRadii = {};
@@ -401,6 +412,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
         gctx, endcapConfig.layers, centralConfig.volumes, m_cfg.volumeMaterial,
         endcapConfig.rMin, endcapConfig.rMax, endcapConfig.zMin,
         endcapConfig.zMax, m_cfg.volumeName + endcapName);
+      
   };
 
   // The negative endcap is created if present
@@ -422,17 +434,21 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     if (nEndcap) {
       volumesContainer.push_back(nEndcap);
       volume = nEndcap;
+      std::cout<<"=====volume = nEndcap;"<<std::endl;
       // Set the inner or outer material
       if (!m_cfg.buildToRadiusZero) {
         volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[0],
                                        Acts::tubeInnerCover);
+        // std::cout<<"=====volume->assignBoundaryMaterial"<<std::endl;
       }
+      std::cout<<"====1===="<<std::endl;
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[1],
                                      Acts::tubeOuterCover);
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[2],
                                      Acts::negativeFaceXY);
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[3],
                                      Acts::positiveFaceXY);
+      std::cout<<"====2===="<<std::endl;
     }
     if (barrel) {
       // Assign boundary material if existing
@@ -570,6 +586,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
     for (auto& layer : lVector) {
       // the thickness of the layer needs to be taken into account
       double thickness = layer->thickness();
+      
       // get the center of the layer
       const Vector3& center = layer->surfaceRepresentation().center(gctx);
       // check if it is a cylinder layer
@@ -583,7 +600,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
         double rMaxC =
             cLayer->surfaceRepresentation().bounds().get(CylinderBounds::eR) +
             0.5 * thickness;
-
+        std::cout<<"=====rMinC: "<<rMinC<<" =====rMaxC: "<<rMaxC<<std::endl;
         double hZ = cLayer->surfaceRepresentation().bounds().get(
             CylinderBounds::eHalfLengthZ);
         lConfig.rMin =
@@ -594,6 +611,8 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
             std::min(lConfig.zMin, center.z() - hZ - m_cfg.layerEnvelopeZ);
         lConfig.zMax =
             std::max(lConfig.zMax, center.z() + hZ + m_cfg.layerEnvelopeZ);
+        std::cout<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
+
       }
       // proceed further if it is a Disc layer
       const RadialBounds* dBounds = dynamic_cast<const RadialBounds*>(
@@ -604,6 +623,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
         double rMaxD = dBounds->rMax();
         double zMinD = center.z() - 0.5 * thickness;
         double zMaxD = center.z() + 0.5 * thickness;
+        std::cout<<"dBounds"<<"=====rMinD: "<<rMinD<<" =====rMaxD: "<<rMaxD<<std::endl;
         lConfig.rMin =
             std::min(lConfig.rMin, rMinD - m_cfg.layerEnvelopeR.first);
         lConfig.rMax =
@@ -611,6 +631,8 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
         lConfig.rMin = std::max(0.0, lConfig.rMin);
         lConfig.zMin = std::min(lConfig.zMin, zMinD - m_cfg.layerEnvelopeZ);
         lConfig.zMax = std::max(lConfig.zMax, zMaxD + m_cfg.layerEnvelopeZ);
+        std::cout<<"dBounds"<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
+
       }
     }
     for (auto& volume : mtvVector) {
@@ -625,6 +647,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
             lConfig.zMin, -cvBounds->get(CylinderVolumeBounds::eHalfLengthZ));
         lConfig.zMax = std::max(
             lConfig.zMax, cvBounds->get(CylinderVolumeBounds::eHalfLengthZ));
+        std::cout<<"cvBounds"<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
       }
     }
   }
@@ -640,5 +663,6 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
   }
 
   // and return what you have
+  std::cout<<"lConfig"<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
   return lConfig;
 }

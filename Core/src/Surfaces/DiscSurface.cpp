@@ -93,6 +93,7 @@ Acts::Result<Acts::Vector2> Acts::DiscSurface::globalToLocal(
   // transport it to the globalframe
   Vector3 loc3Dframe = (transform(gctx).inverse()) * position;
   if (std::abs(loc3Dframe.z()) > std::abs(tolerance)) {
+    std::cout<<"=====DiscSurface.cpp======"<<std::endl;
     return Result<Vector2>::failure(SurfaceError::GlobalPositionNotOnSurface);
   }
   return Result<Acts::Vector2>::success({perp(loc3Dframe), phi(loc3Dframe)});

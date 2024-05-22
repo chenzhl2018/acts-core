@@ -267,8 +267,21 @@ struct WrappingConfig {
     // is present
     if (existingVolumeConfig) {
       // 0 - simple attachment case
+      std::cout<<"=====nVolumeConfig.zMax====="<<nVolumeConfig.zMax<<std::endl;
+      std::cout<<"=====nVolumeConfig.zMin====="<<nVolumeConfig.zMin<<std::endl;
+      std::cout<<"=====existingVolumeConfig.zMax====="<<existingVolumeConfig.zMax<<std::endl;
+      std::cout<<"=====existingVolumeConfig.zMin====="<<existingVolumeConfig.zMin<<std::endl;
+      std::cout<<"=====containerVolumeConfig.zMax====="<<containerVolumeConfig.zMax<<std::endl;
+      std::cout<<"=====containerVolumeConfig.zMin====="<<containerVolumeConfig.zMin<<std::endl;
+      std::cout<<"=====nVolumeConfig.rMax====="<<nVolumeConfig.rMax<<std::endl;
+      std::cout<<"=====nVolumeConfig.rMin====="<<nVolumeConfig.rMin<<std::endl;
+      std::cout<<"=====existingVolumeConfig.rMax====="<<existingVolumeConfig.rMax<<std::endl;
+      std::cout<<"=====existingVolumeConfig.rMin====="<<existingVolumeConfig.rMin<<std::endl;
+      std::cout<<"=====containerVolumeConfig.rMax====="<<containerVolumeConfig.rMax<<std::endl;
+      std::cout<<"=====containerVolumeConfig.rMin====="<<containerVolumeConfig.rMin<<std::endl;
       if (!cVolumeConfig) {
         // check if it can be easily attached
+
         if (nVolumeConfig && nVolumeConfig.zMax < existingVolumeConfig.zMin) {
           nVolumeConfig.attachZ(existingVolumeConfig);
           // will attach the new volume(s)
@@ -286,18 +299,31 @@ struct WrappingConfig {
           nVolumeConfig.rMin = existingVolumeConfig.rMin;
           pVolumeConfig.rMin = existingVolumeConfig.rMin;
         } else {
-          fGapVolumeConfig.present = true;
+          // fGapVolumeConfig.present = true;
+          fGapVolumeConfig.present = false;
           // get the zMin/zMax boundaries
           fGapVolumeConfig.adaptZ(existingVolumeConfig);
           fGapVolumeConfig.rMin = containerVolumeConfig.rMin;
           fGapVolumeConfig.rMax = existingVolumeConfig.rMin;
         }
         // see if outer glue volumes are needed
-        if (containerVolumeConfig.rMax < existingVolumeConfig.rMax) {
+        // if (containerVolumeConfig.rMax < existingVolumeConfig.rMax || containerVolumeConfig.rMax>1000) {
+        if (containerVolumeConfig.rMax < existingVolumeConfig.rMax ) {
+          // nVolumeConfig.rMax = containerVolumeConfig.rMax + 1;
+          // pVolumeConfig.rMax = containerVolumeConfig.rMax + 1;
+          
+          // if(containerVolumeConfig.rMax>1000){
+          //   nVolumeConfig.rMax = 1070.44;
+          //   pVolumeConfig.rMax = 1070.44;
+          //   wCondition = Wrapping;
+          //   wConditionScreen = "[fully wrapped]";            
+          // }
+          std::cout<<"=====containerVolumeConfig.rMax < existingVolumeConfig.rMax"<<std::endl;
           nVolumeConfig.rMax = existingVolumeConfig.rMax;
           pVolumeConfig.rMax = existingVolumeConfig.rMax;
         } else {
-          sGapVolumeConfig.present = true;
+          // sGapVolumeConfig.present = true;
+          sGapVolumeConfig.present = false;
           // get the zMin/zMax boundaries
           sGapVolumeConfig.adaptZ(existingVolumeConfig);
           sGapVolumeConfig.rMin = existingVolumeConfig.rMax;
@@ -357,16 +383,28 @@ struct WrappingConfig {
           // set the Central Wrapping
           wCondition = CentralWrapping;
           wConditionScreen = "[centrally inserted]";
-        } else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
-                    existingVolumeConfig.rMin < containerVolumeConfig.rMin) ||
-                   (existingVolumeConfig.rMax > containerVolumeConfig.rMax &&
-                    existingVolumeConfig.rMin < containerVolumeConfig.rMax)) {
-          // The volumes are overlapping this shouldn't be happening return an
-          // error
-          throw std::invalid_argument(
-              "Volumes are overlapping, this shouldn't be happening. Please "
-              "check your geometry building.");
-        }
+        }else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin && existingVolumeConfig.rMin < containerVolumeConfig.rMin)){
+          nVolumeConfig.rMax = containerVolumeConfig.rMax;
+          cVolumeConfig.rMax = containerVolumeConfig.rMax;
+          pVolumeConfig.rMax = containerVolumeConfig.rMax;
+          // set the rMin
+          nVolumeConfig.rMin = existingVolumeConfig.rMax;
+          cVolumeConfig.rMin = containerVolumeConfig.rMin;
+          pVolumeConfig.rMin = existingVolumeConfig.rMax;
+          // set the Central Wrapping
+          wCondition = CentralWrapping;
+          wConditionScreen = "[CentralWrapping]";
+        } 
+        // else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
+        //             existingVolumeConfig.rMin < containerVolumeConfig.rMin) ||
+        //            (existingVolumeConfig.rMax > containerVolumeConfig.rMax &&
+        //             existingVolumeConfig.rMin < containerVolumeConfig.rMax)) {
+        //   // The volumes are overlapping this shouldn't be happening return an
+        //   // error
+        //   throw std::invalid_argument(
+        //       "Volumes are overlapping, this shouldn't be happening. Please "
+        //       "check your geometry building.");
+        // }
 
         // check if gaps are needed
         //
@@ -380,6 +418,7 @@ struct WrappingConfig {
         // - at the negative sector
         if (existingVolumeConfig.zMin > referenceVolume.zMin) {
           fGapVolumeConfig.present = true;
+          // fGapVolumeConfig.present = false;
           fGapVolumeConfig.adaptR(existingVolumeConfig);
           fGapVolumeConfig.zMin = referenceVolume.zMin;
           fGapVolumeConfig.zMax = existingVolumeConfig.zMin;
@@ -394,6 +433,7 @@ struct WrappingConfig {
         // - at the positive sector
         if (existingVolumeConfig.zMax < referenceVolume.zMax) {
           sGapVolumeConfig.present = true;
+          // sGapVolumeConfig.present = false;
           sGapVolumeConfig.adaptR(existingVolumeConfig);
           sGapVolumeConfig.zMin = existingVolumeConfig.zMax;
           sGapVolumeConfig.zMax = referenceVolume.zMax;

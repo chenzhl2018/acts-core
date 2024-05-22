@@ -115,10 +115,11 @@ int runMaterialRecording(
   evgen.randomNumbers = rnd;
   sequencer.addReader(std::make_shared<EventGenerator>(evgen, logLevel));
 
+  std::cout<<"=====1 setupMaterialRecording====="<<std::endl;
   // Set up the Geant4 Simulation
   setupMaterialRecording(vars, sequencer,
                          std::move(detectorConstructionFactory));
-
+  std::cout<<"=====2 setupMaterialRecording====="<<std::endl;
   // setup the output writing
   if (vars["output-root"].as<bool>()) {
     // Write the propagation steps as ROOT TTree

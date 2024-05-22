@@ -174,6 +174,8 @@ class TGeoLayerBuilder : public ILayerBuilder {
   /// Return the created detector elements
   const std::vector<std::shared_ptr<const TGeoDetectorElement>>&
   detectorElements() const;
+  
+  int minR,minZ;
 
  private:
   /// Configuration object

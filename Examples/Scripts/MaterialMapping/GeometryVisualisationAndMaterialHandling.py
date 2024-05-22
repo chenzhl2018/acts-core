@@ -195,6 +195,7 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
                 continue
             if v_index not in interesting_volumes:
                 interesting_volumes.append(v_index)
+            # print(v_index)
             append_index_if_missing(steering_map, index_to_names[v_index], v_index + 1)
             steering_map[index_to_names[v_index]].layers_no_approach.append(coords[4])
         v_index = v_index + 1
@@ -255,6 +256,7 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
         import numpy as np
 
         color = cm.rainbow(np.linspace(0, 1, len(index_to_extends_layers_cylinders)))
+        # color = cm.rainbow(np.linspace(0, 1, len(index_to_extends_layers_cylinders)*2))
 
         is_in_legend = []
 
@@ -305,7 +307,7 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
         plt.ylabel("R [mm]")
         plt.title("Volumes and Layers (no approach layers)")
         plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-        plt.savefig(output_folder + "/volumes_and_layers.png")
+        plt.savefig(output_folder + "/volumes_and_layers.pdf")
 
         # Plot each volume: layers + approach layers
         v_index = 0
@@ -365,13 +367,16 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
             plt.ylabel("R [mm]")
             plt.title(index_to_names[v_index - 1])
             plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-            plt.savefig(output_folder + "/layers_for_volume_" + str(v_index) + ".png")
+            plt.savefig(output_folder + "/layers_for_volume_" + str(v_index) + ".pdf")
 
         plt.figure(figsize=(20, 10))
 
         # Plot boundaries
         v_index = 0
         is_disc = False
+        linestyles = ["--", "-", ":", "-.", "dotted","--", "-", ":", "-.", "dotted","--", "-", ":", "-.", "dotted","--", "-", ":", "-.", "dotted","--", "-", ":", "-.", "dotted"]  
+
+
         for elements in chain(
             index_to_extends_layers_bounds_cylinders,
             index_to_extends_layers_bounds_discs,
@@ -382,8 +387,10 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
                     plt.plot(
                         x_values,
                         y_values,
-                        linestyle="--",
+                        # linestyle="--",
+                        linestyle=linestyles[v_index],
                         c=color[v_index],
+                        # c=color[v_index*2],
                         label="v: " + str(v_index + 1) + ", b: " + str(coords[3]),
                     )
             v_index = v_index + 1
@@ -395,7 +402,7 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
         plt.ylabel("R [mm]")
         plt.title("Boundary surfaces")
         plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-        plt.savefig(output_folder + "/boundaries.png")
+        plt.savefig(output_folder + "/boundaries.pdf")
 
         plt.figure(figsize=(20, 10))
 
@@ -412,6 +419,8 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
             for coords in elements:
                 if coords[3] == -1:
                     continue
+                # if coords[3] in [1,2]:
+                #     continue
                 x_values, y_values = extract_coords(coords, is_disc)
                 if coords[3] not in add_to_legend:
                     plt.plot(
@@ -435,7 +444,7 @@ def dump_geo(filename, plot, output_folder, dump_steering, steering_file):
         plt.ylabel("R [mm]")
         plt.title("Approach layers")
         plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-        plt.savefig(output_folder + "/approach_layers.png")
+        plt.savefig(output_folder + "/approach_layers.pdf")
 
 
 def read_and_modify(filename, plot, output_folder, steering_file, output_file):
@@ -716,7 +725,7 @@ def read_and_modify(filename, plot, output_folder, steering_file, output_file):
         plt.ylabel("R [mm]")
         plt.title("Layers with material")
         plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-        plt.savefig(output_folder + "/material_layers.png")
+        plt.savefig(output_folder + "/material_layers.pdf")
 
 
 import argparse
