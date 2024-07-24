@@ -293,7 +293,6 @@ Acts::CylinderVolumeHelper::createContainerTrackingVolume(
         "volume (min required: 2) - returning 0 ");
     return nullptr;
   }
-  std::cout<<"====3===="<<std::endl;
   // screen output
   std::string volumeName = "{ ";
   ACTS_VERBOSE("[start] Creating a container volume with " << volumes.size()

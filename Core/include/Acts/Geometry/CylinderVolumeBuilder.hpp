@@ -267,18 +267,6 @@ struct WrappingConfig {
     // is present
     if (existingVolumeConfig) {
       // 0 - simple attachment case
-      std::cout<<"=====nVolumeConfig.zMax====="<<nVolumeConfig.zMax<<std::endl;
-      std::cout<<"=====nVolumeConfig.zMin====="<<nVolumeConfig.zMin<<std::endl;
-      std::cout<<"=====existingVolumeConfig.zMax====="<<existingVolumeConfig.zMax<<std::endl;
-      std::cout<<"=====existingVolumeConfig.zMin====="<<existingVolumeConfig.zMin<<std::endl;
-      std::cout<<"=====containerVolumeConfig.zMax====="<<containerVolumeConfig.zMax<<std::endl;
-      std::cout<<"=====containerVolumeConfig.zMin====="<<containerVolumeConfig.zMin<<std::endl;
-      std::cout<<"=====nVolumeConfig.rMax====="<<nVolumeConfig.rMax<<std::endl;
-      std::cout<<"=====nVolumeConfig.rMin====="<<nVolumeConfig.rMin<<std::endl;
-      std::cout<<"=====existingVolumeConfig.rMax====="<<existingVolumeConfig.rMax<<std::endl;
-      std::cout<<"=====existingVolumeConfig.rMin====="<<existingVolumeConfig.rMin<<std::endl;
-      std::cout<<"=====containerVolumeConfig.rMax====="<<containerVolumeConfig.rMax<<std::endl;
-      std::cout<<"=====containerVolumeConfig.rMin====="<<containerVolumeConfig.rMin<<std::endl;
       if (!cVolumeConfig) {
         // check if it can be easily attached
 
@@ -307,18 +295,7 @@ struct WrappingConfig {
           fGapVolumeConfig.rMax = existingVolumeConfig.rMin;
         }
         // see if outer glue volumes are needed
-        // if (containerVolumeConfig.rMax < existingVolumeConfig.rMax || containerVolumeConfig.rMax>1000) {
         if (containerVolumeConfig.rMax < existingVolumeConfig.rMax ) {
-          // nVolumeConfig.rMax = containerVolumeConfig.rMax + 1;
-          // pVolumeConfig.rMax = containerVolumeConfig.rMax + 1;
-          
-          // if(containerVolumeConfig.rMax>1000){
-          //   nVolumeConfig.rMax = 1070.44;
-          //   pVolumeConfig.rMax = 1070.44;
-          //   wCondition = Wrapping;
-          //   wConditionScreen = "[fully wrapped]";            
-          // }
-          std::cout<<"=====containerVolumeConfig.rMax < existingVolumeConfig.rMax"<<std::endl;
           nVolumeConfig.rMax = existingVolumeConfig.rMax;
           pVolumeConfig.rMax = existingVolumeConfig.rMax;
         } else {
@@ -344,6 +321,9 @@ struct WrappingConfig {
           // will wrap the new volume(s) around existing
           wCondition = Wrapping;
           wConditionScreen = "[fully wrapped]";
+	  
+	  std::cout<<"WARNING: [fully wrapped] manually set the SCT barrel rMax to 550 mm " << std::endl;
+	  cVolumeConfig.rMax = 550; 
         } else if (existingVolumeConfig.rMin > containerVolumeConfig.rMax) {
           // full insertion case
           // set the rMax
@@ -354,7 +334,8 @@ struct WrappingConfig {
           nVolumeConfig.rMin = containerVolumeConfig.rMin;
           cVolumeConfig.rMin = containerVolumeConfig.rMin;
           pVolumeConfig.rMin = containerVolumeConfig.rMin;
-          // will insert the new volume(s) into existing
+          
+	  // will insert the new volume(s) into existing
           wCondition = Inserting;
           wConditionScreen = "[fully inserted]";
         } else if (cVolumeConfig.wraps(existingVolumeConfig)) {
@@ -394,17 +375,20 @@ struct WrappingConfig {
           // set the Central Wrapping
           wCondition = CentralWrapping;
           wConditionScreen = "[CentralWrapping]";
-        } 
-        // else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
-        //             existingVolumeConfig.rMin < containerVolumeConfig.rMin) ||
-        //            (existingVolumeConfig.rMax > containerVolumeConfig.rMax &&
-        //             existingVolumeConfig.rMin < containerVolumeConfig.rMax)) {
-        //   // The volumes are overlapping this shouldn't be happening return an
-        //   // error
-        //   throw std::invalid_argument(
-        //       "Volumes are overlapping, this shouldn't be happening. Please "
-        //       "check your geometry building.");
-        // }
+          
+	  std::cout<<"WARNING: [CentralWrapping] manually set the TRT barrel rMin to 550 mm " << std::endl;
+	  cVolumeConfig.rMin = 550; 
+	} 
+        else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
+                    existingVolumeConfig.rMin < containerVolumeConfig.rMin) ||
+                   (existingVolumeConfig.rMax > containerVolumeConfig.rMax &&
+                    existingVolumeConfig.rMin < containerVolumeConfig.rMax)) {
+          // The volumes are overlapping this shouldn't be happening return an
+          // error
+          throw std::invalid_argument(
+              "Volumes are overlapping, this shouldn't be happening. Please "
+              "check your geometry building.");
+        }
 
         // check if gaps are needed
         //
