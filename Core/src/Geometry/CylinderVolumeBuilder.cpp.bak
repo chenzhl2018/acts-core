@@ -250,6 +250,10 @@ Acts::CylinderVolumeBuilder::trackingVolume(
                 wConfig.cVolumeConfig.zMin, wConfig.cVolumeConfig.zMax,
                 m_cfg.volumeName + "::Barrel")
           : nullptr;
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.rMin=====" <<wConfig.cVolumeConfig.rMin);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.rMan=====" <<wConfig.cVolumeConfig.rMax);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.zMin=====" <<wConfig.cVolumeConfig.zMin);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.zMax=====" <<wConfig.cVolumeConfig.zMax);
   // Helper method to check for
 
   // Helper method to create endcap volume
@@ -400,6 +404,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
         gctx, endcapConfig.layers, centralConfig.volumes, m_cfg.volumeMaterial,
         endcapConfig.rMin, endcapConfig.rMax, endcapConfig.zMin,
         endcapConfig.zMax, m_cfg.volumeName + endcapName);
+      
   };
 
   // The negative endcap is created if present
@@ -432,7 +437,9 @@ Acts::CylinderVolumeBuilder::trackingVolume(
                                      Acts::negativeFaceXY);
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[3],
                                      Acts::positiveFaceXY);
+      std::cout<<"nEndcap ready" << std::endl; 
     }
+    
     if (barrel) {
       // Assign boundary material if existing
       volumesContainer.push_back(barrel);
@@ -448,6 +455,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
                                      Acts::negativeFaceXY);
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[4],
                                      Acts::positiveFaceXY);
+      std::cout<<"barrel ready" << std::endl; 
     }
     if (pEndcap) {
       volumesContainer.push_back(pEndcap);
@@ -463,12 +471,14 @@ Acts::CylinderVolumeBuilder::trackingVolume(
                                      Acts::negativeFaceXY);
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[5],
                                      Acts::positiveFaceXY);
+      std::cout<<"pEndcap ready" << std::endl; 
     }
     // and low lets create the new volume
     volume =
         volumesContainer.size() > 1
             ? tvHelper->createContainerTrackingVolume(gctx, volumesContainer)
             : volume;
+    std::cout<<"Finish creating volume for this sub-detector" << std::endl;
   } else if (wConfig.wCondition != Attaching) {
     // the new volume is the only one present
     volume = nEndcap ? nEndcap : (barrel ? barrel : pEndcap);
@@ -481,6 +491,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     // Check if gaps are needed
     std::vector<TrackingVolumePtr> existingContainer;
     if (wConfig.fGapVolumeConfig) {
+       std::cout<<"Creating the firstGap volume" << std::endl;
       // create the gap volume
       auto fGap = tvHelper->createGapTrackingVolume(
           gctx, wConfig.cVolumeConfig.volumes, m_cfg.volumeMaterial,
@@ -492,6 +503,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     }
     existingContainer.push_back(existingVolumeCp);
     if (wConfig.sGapVolumeConfig) {
+       std::cout<<"Creating the secondGap volume" << std::endl;
       // create the gap volume
       auto sGap = tvHelper->createGapTrackingVolume(
           gctx, wConfig.cVolumeConfig.volumes, m_cfg.volumeMaterial,
@@ -512,88 +524,34 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     // clear the container
     existingContainer.clear();
     if (wConfig.wCondition == CentralWrapping) {
-      std::vector<TrackingVolumePtr> nEndcapVolumesContainer;
-      std::vector<TrackingVolumePtr> barrelVolumesContainer;
-      std::vector<TrackingVolumePtr> pEndcapVolumesContainer;
-      auto existingVolumes =
-          existingVolumeCp->confinedVolumes()->arrayObjects();
-
-      // Only take the pixel
-      if (existingVolumes.size() != 2 ||
-          existingVolumes[0]->volumeName().find("Pixel") == std::string::npos ||
-          existingVolumes[1]->volumeName().find("SCT") == std::string::npos) {
-        throw std::runtime_error(
-            "This hack is only for building ATLAS Pixel + SCT + TRT");
-      }
-      existingContainer.push_back(existingVolumes[0]);
-
-      auto SCT_all = existingVolumes[1]->confinedVolumes()->arrayObjects();
-      if (SCT_all.size() != 3) {
-        throw std::runtime_error(
-            "This hack is only for building ATLAS Pixel + SCT + TRT. The SCT "
-            "should have three subVolumes");
-      }
-      // for(int isub =0 ; isub<SCT_all.size(); ++isub){
-      //    std::cout<<"The volume has name " << SCT_all[isub]->volumeName() <<
-      //    std::endl;
-      // }
-      ACTS_VERBOSE("Build a volume with SCT nEndcap + TRT nEndcap");
-      nEndcapVolumesContainer.push_back(SCT_all[0]);
-      if (nEndcap)
-        nEndcapVolumesContainer.push_back(nEndcap);
-      TrackingVolumePtr SCT_TRT_nEndcap =
-          tvHelper->createContainerTrackingVolume(gctx,
-                                                  nEndcapVolumesContainer);
-
-      ACTS_VERBOSE("Build a volume with SCT barrel + TRT barrel");
-      barrelVolumesContainer.push_back(SCT_all[1]);
-      if (barrel)
-        barrelVolumesContainer.push_back(barrel);
-      TrackingVolumePtr SCT_TRT_barrel =
-          tvHelper->createContainerTrackingVolume(gctx, barrelVolumesContainer);
-
-      ACTS_VERBOSE("Build a volume with SCT pEndcap + TRT pEndcap");
-      pEndcapVolumesContainer.push_back(SCT_all[2]);
-      if (pEndcap)
-        pEndcapVolumesContainer.push_back(pEndcap);
-      TrackingVolumePtr SCT_TRT_pEndcap =
-          tvHelper->createContainerTrackingVolume(gctx,
-                                                  pEndcapVolumesContainer);
-
-      ACTS_VERBOSE(
-          "Build a volume with (SCT+TRT) nEndcap + (SCT+TRT) barrel + "
-          "(SCT+TRT) pEndcap");
-      std::vector<TrackingVolumePtr> volumesContainer_SCT_TRT;
-      volumesContainer_SCT_TRT.push_back(SCT_TRT_nEndcap);
-      volumesContainer_SCT_TRT.push_back(SCT_TRT_barrel);
-      volumesContainer_SCT_TRT.push_back(SCT_TRT_pEndcap);
-      TrackingVolumePtr SCT_TRT = tvHelper->createContainerTrackingVolume(
-          gctx, volumesContainer_SCT_TRT);
-
-      existingContainer.push_back(SCT_TRT);
+      existingContainer.push_back(existingVolumeCp);
+      existingContainer.push_back(barrel);
+       std::cout<<"Building existing + barrel" << std::endl;  
+      ////Build the endcaps together with barrel for TRT 
+      //if (nEndcap) {
+      //  existingContainer.push_back(nEndcap); 
+      //} 
+      //if (pEndcap) {
+      //  existingContainer.push_back(pEndcap); 
+      //} 
     } else if (wConfig.wCondition == CentralInserting) {
       existingContainer.push_back(barrel);
       existingContainer.push_back(existingVolumeCp);
     }
     // update
-    if (wConfig.wCondition == CentralWrapping) {
-      ACTS_VERBOSE(
-          "Build a volume with Pixel + ((SCT+TRT) nEndcap + (SCT+TRT) barrel + "
-          "(SCT+TRT) pEndcap)");
-      volume = tvHelper->createContainerTrackingVolume(gctx, existingContainer);
-      return volume;
-    } else {
-      existingVolumeCp =
-          !existingContainer.empty()
-              ? tvHelper->createContainerTrackingVolume(gctx, existingContainer)
-              : existingVolumeCp;
-    }
+    existingVolumeCp =
+        !existingContainer.empty()
+            ? tvHelper->createContainerTrackingVolume(gctx, existingContainer)
+            : existingVolumeCp;
 
     std::vector<TrackingVolumePtr> totalContainer;
     // check what to do with the existing
     if (wConfig.wCondition == Attaching ||
-        // wConfig.wCondition == CentralWrapping ||
+        wConfig.wCondition == CentralWrapping ||
         wConfig.wCondition == CentralInserting) {
+       std::cout<<"EntralWrapping" << std::endl;  
+      //volume = tvHelper->createContainerTrackingVolume(gctx, existingContainer);
+      //return volume;
       if (nEndcap) {
         totalContainer.push_back(nEndcap);
       }
@@ -634,7 +592,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
     for (auto& layer : lVector) {
       // the thickness of the layer needs to be taken into account
       double thickness = layer->thickness();
-
+      
       // get the center of the layer
       const Vector3& center = layer->surfaceRepresentation().center(gctx);
       // check if it is a cylinder layer
@@ -658,6 +616,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
             std::min(lConfig.zMin, center.z() - hZ - m_cfg.layerEnvelopeZ);
         lConfig.zMax =
             std::max(lConfig.zMax, center.z() + hZ + m_cfg.layerEnvelopeZ);
+
       }
       // proceed further if it is a Disc layer
       const RadialBounds* dBounds = dynamic_cast<const RadialBounds*>(
@@ -675,6 +634,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
         lConfig.rMin = std::max(0.0, lConfig.rMin);
         lConfig.zMin = std::min(lConfig.zMin, zMinD - m_cfg.layerEnvelopeZ);
         lConfig.zMax = std::max(lConfig.zMax, zMaxD + m_cfg.layerEnvelopeZ);
+
       }
     }
     for (auto& volume : mtvVector) {

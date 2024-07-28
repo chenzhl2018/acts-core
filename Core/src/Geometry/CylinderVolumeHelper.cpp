@@ -365,6 +365,10 @@ Acts::CylinderVolumeHelper::createContainerTrackingVolume(
     rMin = firstVolumeBounds->get(CylinderVolumeBounds::eMinR);
     rGlueMin = firstVolumeBounds->get(CylinderVolumeBounds::eMaxR);
     rMax = lastVolumeBounds->get(CylinderVolumeBounds::eMaxR);
+    ACTS_VERBOSE("rCase: zMin = "
+                 << zMin << ", zMax = " << zMax << ", zSep1 = " << zSep1
+                 << ", zSep2 = " << zSep2 << ", rMin = " << rMin
+                 << ", rGlueMin = " << rGlueMin << ", rMax = " << rMax);
   } else {
     zMin = (*firstVolume)->center().z() -
            firstVolumeBounds->get(CylinderVolumeBounds::eHalfLengthZ);
@@ -375,6 +379,10 @@ Acts::CylinderVolumeHelper::createContainerTrackingVolume(
     zSep2 = zSep1;
     rMin = firstVolumeBounds->get(CylinderVolumeBounds::eMinR);
     rMax = firstVolumeBounds->get(CylinderVolumeBounds::eMaxR);
+    ACTS_VERBOSE("zCase: zMin = "
+                 << zMin << ", zMax = " << zMax << ", zSep1 = " << zSep1
+                 << ", zSep2 = " << zSep2 << ", rMin = " << rMin
+                 << ", rGlueMin = " << rGlueMin << ", rMax = " << rMax);
   }
   // Estimate the z - position
   double zPos = 0.5 * (zMin + zMax);
@@ -385,7 +393,8 @@ Acts::CylinderVolumeHelper::createContainerTrackingVolume(
       new CylinderVolumeBounds(rMin, rMax, 0.5 * std::abs(zMax - zMin));
 
   // some screen output
-  ACTS_VERBOSE("Container volume bounds are " << (*topVolumeBounds));
+  ACTS_VERBOSE("Constructed container volume bounds are "
+               << (*topVolumeBounds));
 
   // create the volume array with the ITrackingVolumeArrayCreator
   std::shared_ptr<const TrackingVolumeArray> volumeArray =
@@ -415,6 +424,7 @@ Acts::CylinderVolumeHelper::createContainerTrackingVolume(
 
   ACTS_VERBOSE(
       "[ end ] return newly created container : " << topVolume->volumeName());
+  ACTS_VERBOSE("     with bounds : " << (*topVolume).volumeBounds());
 
   return topVolume;
 }
@@ -626,7 +636,8 @@ bool Acts::CylinderVolumeHelper::interGlueTrackingVolume(
       // loop over the volumes -------------------------------
       for (; tVolIter != tVolEnd;) {
         // screen output
-        ACTS_VERBOSE("r-binning: Processing volume [" << ivol++ << "]");
+        ACTS_VERBOSE("r-binning: Processing volume ["
+                     << ivol++ << "] with name " << (*tVolIter)->volumeName());
         // for the first one
         std::shared_ptr<TrackingVolume> tVol =
             std::const_pointer_cast<TrackingVolume>(*tVolIter);
@@ -651,7 +662,9 @@ bool Acts::CylinderVolumeHelper::interGlueTrackingVolume(
                          .values()[CylinderVolumeBounds::BoundValues::eMaxR] +
                      tVol2->volumeBounds()
                          .values()[CylinderVolumeBounds::BoundValues::eMinR]);
-
+          ACTS_VERBOSE("Glue volume  " << tVol1->volumeName() << " and "
+                                       << tVol2->volumeName()
+                                       << " with r-Binning");
           glueTrackingVolumes(gctx, tVol1, tubeOuterCover, tVol2,
                               tubeInnerCover, rMin, rGlueR, rMax, zMin, zMax);
         }
@@ -662,7 +675,8 @@ bool Acts::CylinderVolumeHelper::interGlueTrackingVolume(
       for (; tVolIter != tVolEnd;) {
         // screen output
         ACTS_VERBOSE("z-binning: Processing volume '"
-                     << (*tVolIter)->volumeName() << "'.");
+                     << (*tVolIter)->volumeName() << "' with name "
+                     << (*tVolIter)->volumeName());
         std::shared_ptr<TrackingVolume> tVol =
             std::const_pointer_cast<TrackingVolume>(*tVolIter);
         if (tVolIter == tVolFirst) {
@@ -678,6 +692,8 @@ bool Acts::CylinderVolumeHelper::interGlueTrackingVolume(
               std::const_pointer_cast<TrackingVolume>(*tVolIter);
           std::shared_ptr<TrackingVolume> tVol2 =
               std::const_pointer_cast<TrackingVolume>(*(++tVolIter));
+          ACTS_VERBOSE("Glue volume  " << tVol1->volumeName() << " and "
+                                       << tVol2->volumeName());
           glueTrackingVolumes(gctx, tVol1, positiveFaceXY, tVol2,
                               negativeFaceXY, rMin, rGlueMin, rMax, zMin, zMax);
         }

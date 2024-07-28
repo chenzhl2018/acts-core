@@ -14,11 +14,9 @@
 #include "Acts/Surfaces/Surface.hpp"
 
 #include <array>
+#include <map>
 #include <ostream>
 #include <string>
-#include <map>
-
-
 
 std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
     const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
@@ -48,7 +46,7 @@ std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
   for (auto& sf : surfaces) {
     auto sfExtent = sf->polyhedronRepresentation(gctx, 1).extent();
     sfExtent.envelope()[sorting.first] = {sorting.second, sorting.second};
-    // std::cout<<"sorting.second = " << sorting.second << std::endl; 
+    // std::cout<<"sorting.second = " << sorting.second << std::endl;
     auto& sfCluster = findCluster(sfExtent);
     sfCluster.first.extend(sfExtent);
     sfCluster.second.push_back(sf);
@@ -68,8 +66,8 @@ std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
     const std::vector<SortingConfig>& sortings) const {
   ACTS_DEBUG("Received " << surfaces.size() << " surfaces at input.");
   std::vector<std::vector<const Surface*>> sortSurfaces = {surfaces};
-  std::cout<<"sortings size " << sortings.size() << std::endl; 
-  std::cout<<"sortSurfaces size " << sortSurfaces.size() << std::endl; 
+  std::cout << "sortings size " << sortings.size() << std::endl;
+  std::cout << "sortSurfaces size " << sortSurfaces.size() << std::endl;
   for (const auto& sorting : sortings) {
     ACTS_VERBOSE("-> Sorting a set of " << sortSurfaces.size() << " in "
                                         << binningValueNames()[sorting.first]);
@@ -100,44 +98,44 @@ std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
 std::vector<Acts::ProtoLayer> Acts::ProtoLayerHelper::protoLayers(
     const GeometryContext& gctx, const std::vector<const Surface*>& surfaces,
     const SortingConfig& sorting, int type, int minR, int minZ) const {
-
   ACTS_DEBUG("Received " << surfaces.size() << " surfaces at input.");
   ACTS_VERBOSE("-> Sorting a set of " << surfaces.size() << " in "
-                                        << binningValueNames()[sorting.first]);
+                                      << binningValueNames()[sorting.first]);
   std::map<int, std::vector<const Surface*>> subSurfaces;
-  
+
   std::vector<const Surface*> sortSurfaces = surfaces;
 
-  if(type == 0){
-
-    std::sort(sortSurfaces.begin(), sortSurfaces.end(), [&](const auto& a, const auto& b) {
-        auto aR = std::hypot(a->center(gctx).x(), a->center(gctx).y());    
-        auto bR = std::hypot(b->center(gctx).x(), b->center(gctx).y());    
-        return  aR < bR ;
-    });
+  if (type == 0) {
+    std::sort(sortSurfaces.begin(), sortSurfaces.end(),
+              [&](const auto& a, const auto& b) {
+                auto aR = std::hypot(a->center(gctx).x(), a->center(gctx).y());
+                auto bR = std::hypot(b->center(gctx).x(), b->center(gctx).y());
+                return aR < bR;
+              });
     // int minR=560;
-    for(const auto sf : sortSurfaces){
+    for (const auto sf : sortSurfaces) {
       auto radius = std::hypot(sf->center(gctx).x(), sf->center(gctx).y());
-      int bin = (radius-minR)/sorting.second; 
-      subSurfaces[bin].push_back(sf); 
+      int bin = (radius - minR) / sorting.second;
+      subSurfaces[bin].push_back(sf);
     }
-  }else{
-    //sorting by z
-    std::sort(sortSurfaces.begin(), sortSurfaces.end(), [&](const auto& a, const auto& b) {
-        auto aZ = abs(a->center(gctx).z());    
-        auto bZ = abs(b->center(gctx).z());    
-        return  aZ < bZ ;
-    });
+  } else {
+    // sorting by z
+    std::sort(sortSurfaces.begin(), sortSurfaces.end(),
+              [&](const auto& a, const auto& b) {
+                auto aZ = abs(a->center(gctx).z());
+                auto bZ = abs(b->center(gctx).z());
+                return aZ < bZ;
+              });
     // int minZ = 840;
-    for(const auto sf : sortSurfaces){
-      int bin = (abs(sf->center(gctx).z())-abs(minZ))/sorting.second; 
+    for (const auto sf : sortSurfaces) {
+      int bin = (abs(sf->center(gctx).z()) - abs(minZ)) / sorting.second;
       subSurfaces[bin].push_back(sf);
       // std::cout << "sorting.second" <<sorting.second<<std::endl;
       // std::cout << sf->center(gctx).z()<<std::endl;
       // std::cout << "bin" <<bin<<std::endl;
     }
   }
- 
+
   ACTS_DEBUG("Yielded " << subSurfaces.size() << " at output.");
 
   std::vector<Acts::ProtoLayer> finalProtoLayers;

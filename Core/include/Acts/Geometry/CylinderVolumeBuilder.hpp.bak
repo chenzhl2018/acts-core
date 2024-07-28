@@ -267,6 +267,18 @@ struct WrappingConfig {
     // is present
     if (existingVolumeConfig) {
       // 0 - simple attachment case
+      std::cout<<"=====nVolumeConfig.zMax====="<<nVolumeConfig.zMax<<std::endl;
+      std::cout<<"=====nVolumeConfig.zMin====="<<nVolumeConfig.zMin<<std::endl;
+      std::cout<<"=====existingVolumeConfig.zMax====="<<existingVolumeConfig.zMax<<std::endl;
+      std::cout<<"=====existingVolumeConfig.zMin====="<<existingVolumeConfig.zMin<<std::endl;
+      std::cout<<"=====containerVolumeConfig.zMax====="<<containerVolumeConfig.zMax<<std::endl;
+      std::cout<<"=====containerVolumeConfig.zMin====="<<containerVolumeConfig.zMin<<std::endl;
+      std::cout<<"=====nVolumeConfig.rMax====="<<nVolumeConfig.rMax<<std::endl;
+      std::cout<<"=====nVolumeConfig.rMin====="<<nVolumeConfig.rMin<<std::endl;
+      std::cout<<"=====existingVolumeConfig.rMax====="<<existingVolumeConfig.rMax<<std::endl;
+      std::cout<<"=====existingVolumeConfig.rMin====="<<existingVolumeConfig.rMin<<std::endl;
+      std::cout<<"=====containerVolumeConfig.rMax====="<<containerVolumeConfig.rMax<<std::endl;
+      std::cout<<"=====containerVolumeConfig.rMin====="<<containerVolumeConfig.rMin<<std::endl;
       if (!cVolumeConfig) {
         // check if it can be easily attached
 
@@ -284,7 +296,8 @@ struct WrappingConfig {
         }
         // see if inner glue volumes are needed
         if (containerVolumeConfig.rMin > existingVolumeConfig.rMin) {
-          nVolumeConfig.rMin = existingVolumeConfig.rMin;
+          std::cout<<"containerVolumeConfig.rMin > existingVolumeConfig.rMin " << std::endl; 
+	  nVolumeConfig.rMin = existingVolumeConfig.rMin;
           pVolumeConfig.rMin = existingVolumeConfig.rMin;
         } else {
           // fGapVolumeConfig.present = true;
@@ -295,7 +308,18 @@ struct WrappingConfig {
           fGapVolumeConfig.rMax = existingVolumeConfig.rMin;
         }
         // see if outer glue volumes are needed
-        if (containerVolumeConfig.rMax < existingVolumeConfig.rMax) {
+        // if (containerVolumeConfig.rMax < existingVolumeConfig.rMax || containerVolumeConfig.rMax>1000) {
+        if (containerVolumeConfig.rMax < existingVolumeConfig.rMax ) {
+          std::cout<<"containerVolumeConfig.rMax < existingVolumeConfig.rMax " << std::endl; 
+          // nVolumeConfig.rMax = containerVolumeConfig.rMax + 1;
+          // pVolumeConfig.rMax = containerVolumeConfig.rMax + 1;
+          
+          // if(containerVolumeConfig.rMax>1000){
+          //   nVolumeConfig.rMax = 1070.44;
+          //   pVolumeConfig.rMax = 1070.44;
+          //   wCondition = Wrapping;
+          //   wConditionScreen = "[fully wrapped]";            
+          // }
           nVolumeConfig.rMax = existingVolumeConfig.rMax;
           pVolumeConfig.rMax = existingVolumeConfig.rMax;
         } else {
@@ -309,6 +333,7 @@ struct WrappingConfig {
       } else {
         // full wrapping or full insertion case
         if (existingVolumeConfig.rMax < containerVolumeConfig.rMin) {
+          std::cout<<"[fully wrapped] " << std::endl; 
           // Full wrapping case
           // - set the rMin
           nVolumeConfig.rMin = existingVolumeConfig.rMax;
@@ -318,13 +343,21 @@ struct WrappingConfig {
           nVolumeConfig.rMax = containerVolumeConfig.rMax;
           cVolumeConfig.rMax = containerVolumeConfig.rMax;
           pVolumeConfig.rMax = containerVolumeConfig.rMax;
-          // will wrap the new volume(s) around existing
+         
+	  if( std::abs(containerVolumeConfig.rMax - 601.537) < 0.1){
+            cVolumeConfig.rMax = 550;
+            cVolumeConfig.zMin = -790;
+            cVolumeConfig.zMax = 790;
+            pVolumeConfig.zMin = 790;
+            nVolumeConfig.zMax = -790;
+	    std::cout<<"hacks by xiaocong: set the SCT barrel rMax to 550" << std::endl;
+	  } 
+	  
+	  // will wrap the new volume(s) around existing
           wCondition = Wrapping;
           wConditionScreen = "[fully wrapped]";
-
-          // std::cout<<"WARNING: [fully wrapped] manually set the SCT barrel
-          // rMax to 550 mm " << std::endl; cVolumeConfig.rMax = 550;
         } else if (existingVolumeConfig.rMin > containerVolumeConfig.rMax) {
+          std::cout<<"[fully inserted] " << std::endl; 
           // full insertion case
           // set the rMax
           nVolumeConfig.rMax = existingVolumeConfig.rMin;
@@ -334,12 +367,12 @@ struct WrappingConfig {
           nVolumeConfig.rMin = containerVolumeConfig.rMin;
           cVolumeConfig.rMin = containerVolumeConfig.rMin;
           pVolumeConfig.rMin = containerVolumeConfig.rMin;
-
           // will insert the new volume(s) into existing
           wCondition = Inserting;
           wConditionScreen = "[fully inserted]";
         } else if (cVolumeConfig.wraps(existingVolumeConfig)) {
-          // central wrapping case
+          std::cout<<"[centrally wrapped] " << std::endl; 
+	  // central wrapping case
           // set the rMax
           nVolumeConfig.rMax = containerVolumeConfig.rMax;
           cVolumeConfig.rMax = containerVolumeConfig.rMax;
@@ -348,10 +381,14 @@ struct WrappingConfig {
           nVolumeConfig.rMin = existingVolumeConfig.rMin;
           cVolumeConfig.rMin = existingVolumeConfig.rMax;
           pVolumeConfig.rMin = existingVolumeConfig.rMin;
+
+
+
           // set the Central Wrapping
           wCondition = CentralWrapping;
           wConditionScreen = "[centrally wrapped]";
         } else if (existingVolumeConfig.wraps(cVolumeConfig)) {
+          std::cout<<"[centrally inserted] " << std::endl; 
           // central insertion case
           // set the rMax
           nVolumeConfig.rMax = containerVolumeConfig.rMax;
@@ -364,8 +401,8 @@ struct WrappingConfig {
           // set the Central Wrapping
           wCondition = CentralWrapping;
           wConditionScreen = "[centrally inserted]";
-        } else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
-                    existingVolumeConfig.rMin < containerVolumeConfig.rMin)) {
+        }else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin && existingVolumeConfig.rMin < containerVolumeConfig.rMin)){
+          std::cout<<"[CentralWrapping] " << std::endl; 
           nVolumeConfig.rMax = containerVolumeConfig.rMax;
           cVolumeConfig.rMax = containerVolumeConfig.rMax;
           pVolumeConfig.rMax = containerVolumeConfig.rMax;
@@ -373,13 +410,18 @@ struct WrappingConfig {
           nVolumeConfig.rMin = existingVolumeConfig.rMax;
           cVolumeConfig.rMin = containerVolumeConfig.rMin;
           pVolumeConfig.rMin = existingVolumeConfig.rMax;
-          // set the Central Wrapping
+          
+          std::cout<<"hacks added by xiaocong: set trt barrel rMin to 550" << std::endl;
+	  cVolumeConfig.rMin = 550;
+          cVolumeConfig.zMin = -790;
+          cVolumeConfig.zMax = 790;
+          pVolumeConfig.zMin = 790;
+          nVolumeConfig.zMax = -790;
+	  // set the Central Wrapping
           wCondition = CentralWrapping;
           wConditionScreen = "[CentralWrapping]";
-
-          // std::cout<<"WARNING: [CentralWrapping] manually set the TRT barrel
-          // rMin to 550 mm " << std::endl; cVolumeConfig.rMin = 550;
-        } else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
+        } 
+        else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
                     existingVolumeConfig.rMin < containerVolumeConfig.rMin) ||
                    (existingVolumeConfig.rMax > containerVolumeConfig.rMax &&
                     existingVolumeConfig.rMin < containerVolumeConfig.rMax)) {
@@ -429,8 +471,8 @@ struct WrappingConfig {
             cVolumeConfig.zMax = existingVolumeConfig.zMax;
           }
         }
-      }  // there is cVolume
-    }    // there is existingVolume
+      }
+    }
     return;
   }
 

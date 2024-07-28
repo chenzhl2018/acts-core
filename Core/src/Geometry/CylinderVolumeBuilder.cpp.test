@@ -114,12 +114,19 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     wConfig.existingVolumeConfig.zMax =
         existingVolume->center().z() +
         existingBounds->get(CylinderVolumeBounds::eHalfLengthZ);
+  
+    std::cout<<"wConfig.existingVolumeConfig.rMin" <<wConfig.existingVolumeConfig.rMin<<std::endl;
+    std::cout<<"wConfig.existingVolumeConfig.rMax" <<wConfig.existingVolumeConfig.rMax<<std::endl;
+    std::cout<<"wConfig.existingVolumeConfig.zMin" <<wConfig.existingVolumeConfig.zMin<<std::endl;
+    std::cout<<"wConfig.existingVolumeConfig.zMax" <<wConfig.existingVolumeConfig.zMax<<std::endl;
+
   }
   //
   // b) outside config
   // the volume config for the Outside
   VolumeConfig externalBoundConfig;
   if (externalBounds) {
+    std::cout<<"=====externalBounds====="<<std::endl;
     const CylinderVolumeBounds* ocvBounds =
         dynamic_cast<const CylinderVolumeBounds*>(externalBounds.get());
     // the cast to CylinderVolumeBounds needs to be successful
@@ -250,6 +257,10 @@ Acts::CylinderVolumeBuilder::trackingVolume(
                 wConfig.cVolumeConfig.zMin, wConfig.cVolumeConfig.zMax,
                 m_cfg.volumeName + "::Barrel")
           : nullptr;
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.rMin=====" <<wConfig.cVolumeConfig.rMin);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.rMan=====" <<wConfig.cVolumeConfig.rMax);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.zMin=====" <<wConfig.cVolumeConfig.zMin);
+  ACTS_DEBUG("=====wConfig.cVolumeConfig.zMax=====" <<wConfig.cVolumeConfig.zMax);
   // Helper method to check for
 
   // Helper method to create endcap volume
@@ -263,6 +274,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     // Check for ring layout
     if (m_cfg.checkRingLayout) {
       ACTS_DEBUG("Configured to check for ring layout - parsing layers.");
+      std::cout<<"=====Configured to check for ring layout - parsing layers."<<std::endl;
       // Parsing loop for ring layout
       std::vector<double> innerRadii = {};
       std::vector<double> outerRadii = {};
@@ -400,6 +412,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
         gctx, endcapConfig.layers, centralConfig.volumes, m_cfg.volumeMaterial,
         endcapConfig.rMin, endcapConfig.rMax, endcapConfig.zMin,
         endcapConfig.zMax, m_cfg.volumeName + endcapName);
+      
   };
 
   // The negative endcap is created if present
@@ -421,17 +434,21 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     if (nEndcap) {
       volumesContainer.push_back(nEndcap);
       volume = nEndcap;
+      std::cout<<"=====volume = nEndcap;"<<std::endl;
       // Set the inner or outer material
       if (!m_cfg.buildToRadiusZero) {
         volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[0],
                                        Acts::tubeInnerCover);
+        // std::cout<<"=====volume->assignBoundaryMaterial"<<std::endl;
       }
+      std::cout<<"====1===="<<std::endl;
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[1],
                                      Acts::tubeOuterCover);
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[2],
                                      Acts::negativeFaceXY);
       volume->assignBoundaryMaterial(m_cfg.boundaryMaterial[3],
                                      Acts::positiveFaceXY);
+      std::cout<<"====2===="<<std::endl;
     }
     if (barrel) {
       // Assign boundary material if existing
@@ -503,6 +520,7 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     }
 
     // And low lets create the new existing volume with gaps
+    std::cout<<"create the new existing volume with gaps ================================" << std::endl; 
     existingVolumeCp =
         existingContainer.size() > 1
             ? tvHelper->createContainerTrackingVolume(gctx, existingContainer)
@@ -512,105 +530,55 @@ Acts::CylinderVolumeBuilder::trackingVolume(
     // clear the container
     existingContainer.clear();
     if (wConfig.wCondition == CentralWrapping) {
-      std::vector<TrackingVolumePtr> nEndcapVolumesContainer;
-      std::vector<TrackingVolumePtr> barrelVolumesContainer;
-      std::vector<TrackingVolumePtr> pEndcapVolumesContainer;
-      auto existingVolumes =
-          existingVolumeCp->confinedVolumes()->arrayObjects();
-
-      // Only take the pixel
-      if (existingVolumes.size() != 2 ||
-          existingVolumes[0]->volumeName().find("Pixel") == std::string::npos ||
-          existingVolumes[1]->volumeName().find("SCT") == std::string::npos) {
-        throw std::runtime_error(
-            "This hack is only for building ATLAS Pixel + SCT + TRT");
+      existingContainer.push_back(existingVolumeCp);
+      existingContainer.push_back(barrel);
+      if(nEndcap){
+        existingContainer.push_back(nEndcap); 
       }
-      existingContainer.push_back(existingVolumes[0]);
-
-      auto SCT_all = existingVolumes[1]->confinedVolumes()->arrayObjects();
-      if (SCT_all.size() != 3) {
-        throw std::runtime_error(
-            "This hack is only for building ATLAS Pixel + SCT + TRT. The SCT "
-            "should have three subVolumes");
+      if(pEndcap) {
+        existingContainer.push_back(pEndcap); 
       }
-      // for(int isub =0 ; isub<SCT_all.size(); ++isub){
-      //    std::cout<<"The volume has name " << SCT_all[isub]->volumeName() <<
-      //    std::endl;
-      // }
-      ACTS_VERBOSE("Build a volume with SCT nEndcap + TRT nEndcap");
-      nEndcapVolumesContainer.push_back(SCT_all[0]);
-      if (nEndcap)
-        nEndcapVolumesContainer.push_back(nEndcap);
-      TrackingVolumePtr SCT_TRT_nEndcap =
-          tvHelper->createContainerTrackingVolume(gctx,
-                                                  nEndcapVolumesContainer);
-
-      ACTS_VERBOSE("Build a volume with SCT barrel + TRT barrel");
-      barrelVolumesContainer.push_back(SCT_all[1]);
-      if (barrel)
-        barrelVolumesContainer.push_back(barrel);
-      TrackingVolumePtr SCT_TRT_barrel =
-          tvHelper->createContainerTrackingVolume(gctx, barrelVolumesContainer);
-
-      ACTS_VERBOSE("Build a volume with SCT pEndcap + TRT pEndcap");
-      pEndcapVolumesContainer.push_back(SCT_all[2]);
-      if (pEndcap)
-        pEndcapVolumesContainer.push_back(pEndcap);
-      TrackingVolumePtr SCT_TRT_pEndcap =
-          tvHelper->createContainerTrackingVolume(gctx,
-                                                  pEndcapVolumesContainer);
-
-      ACTS_VERBOSE(
-          "Build a volume with (SCT+TRT) nEndcap + (SCT+TRT) barrel + "
-          "(SCT+TRT) pEndcap");
-      std::vector<TrackingVolumePtr> volumesContainer_SCT_TRT;
-      volumesContainer_SCT_TRT.push_back(SCT_TRT_nEndcap);
-      volumesContainer_SCT_TRT.push_back(SCT_TRT_barrel);
-      volumesContainer_SCT_TRT.push_back(SCT_TRT_pEndcap);
-      TrackingVolumePtr SCT_TRT = tvHelper->createContainerTrackingVolume(
-          gctx, volumesContainer_SCT_TRT);
-
-      existingContainer.push_back(SCT_TRT);
     } else if (wConfig.wCondition == CentralInserting) {
       existingContainer.push_back(barrel);
       existingContainer.push_back(existingVolumeCp);
     }
+    std::cout<<"update with existingVolumeCp + barrel+ pEndcap + nEndcap for central wrapping or inserting" << std::endl; 
     // update
-    if (wConfig.wCondition == CentralWrapping) {
-      ACTS_VERBOSE(
-          "Build a volume with Pixel + ((SCT+TRT) nEndcap + (SCT+TRT) barrel + "
-          "(SCT+TRT) pEndcap)");
-      volume = tvHelper->createContainerTrackingVolume(gctx, existingContainer);
-      return volume;
-    } else {
-      existingVolumeCp =
-          !existingContainer.empty()
-              ? tvHelper->createContainerTrackingVolume(gctx, existingContainer)
-              : existingVolumeCp;
-    }
+    existingVolumeCp =
+        !existingContainer.empty()
+            ? tvHelper->createContainerTrackingVolume(gctx, existingContainer)
+            : existingVolumeCp;
 
     std::vector<TrackingVolumePtr> totalContainer;
     // check what to do with the existing
     if (wConfig.wCondition == Attaching ||
-        // wConfig.wCondition == CentralWrapping ||
+        wConfig.wCondition == CentralWrapping ||
         wConfig.wCondition == CentralInserting) {
-      if (nEndcap) {
-        totalContainer.push_back(nEndcap);
-      }
-      totalContainer.push_back(existingVolumeCp);
-      if (pEndcap) {
-        totalContainer.push_back(pEndcap);
-      }
+      //if (nEndcap) {
+      //  totalContainer.push_back(nEndcap);
+      //}
+      //totalContainer.push_back(existingVolumeCp);
+      //if (pEndcap) {
+      //  totalContainer.push_back(pEndcap);
+      //}
+      //if(!(nEndcap or pEndcap)){
+        std::cout<<"hacks from xiaocong: case 1 " << std::endl;
+        volume = tvHelper->createContainerTrackingVolume(gctx, existingContainer); 
+	return volume; 
+      //}
     } else if (wConfig.wCondition == Inserting && volume) {
       totalContainer.push_back(volume);
       totalContainer.push_back(existingVolumeCp);
+      std::cout<<"case 2 " << std::endl;
     } else if (wConfig.wCondition == Wrapping && volume) {
       totalContainer.push_back(existingVolumeCp);
       totalContainer.push_back(volume);
+      std::cout<<"case 3 " << std::endl;
     } else {
       ACTS_ERROR("Misconfiguration in volume building detected.");
       return nullptr;
     }
+    std::cout<<"now create the new container ===============================" << std::endl; 
     // now create the new container volume
     volume = tvHelper->createContainerTrackingVolume(gctx, totalContainer);
   }
@@ -634,7 +602,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
     for (auto& layer : lVector) {
       // the thickness of the layer needs to be taken into account
       double thickness = layer->thickness();
-
+      
       // get the center of the layer
       const Vector3& center = layer->surfaceRepresentation().center(gctx);
       // check if it is a cylinder layer
@@ -648,6 +616,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
         double rMaxC =
             cLayer->surfaceRepresentation().bounds().get(CylinderBounds::eR) +
             0.5 * thickness;
+        std::cout<<"=====rMinC: "<<rMinC<<" =====rMaxC: "<<rMaxC<<std::endl;
         double hZ = cLayer->surfaceRepresentation().bounds().get(
             CylinderBounds::eHalfLengthZ);
         lConfig.rMin =
@@ -658,6 +627,8 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
             std::min(lConfig.zMin, center.z() - hZ - m_cfg.layerEnvelopeZ);
         lConfig.zMax =
             std::max(lConfig.zMax, center.z() + hZ + m_cfg.layerEnvelopeZ);
+        std::cout<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
+
       }
       // proceed further if it is a Disc layer
       const RadialBounds* dBounds = dynamic_cast<const RadialBounds*>(
@@ -668,6 +639,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
         double rMaxD = dBounds->rMax();
         double zMinD = center.z() - 0.5 * thickness;
         double zMaxD = center.z() + 0.5 * thickness;
+        std::cout<<"dBounds"<<"=====rMinD: "<<rMinD<<" =====rMaxD: "<<rMaxD<<std::endl;
         lConfig.rMin =
             std::min(lConfig.rMin, rMinD - m_cfg.layerEnvelopeR.first);
         lConfig.rMax =
@@ -675,6 +647,8 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
         lConfig.rMin = std::max(0.0, lConfig.rMin);
         lConfig.zMin = std::min(lConfig.zMin, zMinD - m_cfg.layerEnvelopeZ);
         lConfig.zMax = std::max(lConfig.zMax, zMaxD + m_cfg.layerEnvelopeZ);
+        std::cout<<"dBounds"<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
+
       }
     }
     for (auto& volume : mtvVector) {
@@ -689,6 +663,7 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
             lConfig.zMin, -cvBounds->get(CylinderVolumeBounds::eHalfLengthZ));
         lConfig.zMax = std::max(
             lConfig.zMax, cvBounds->get(CylinderVolumeBounds::eHalfLengthZ));
+        std::cout<<"cvBounds"<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
       }
     }
   }
@@ -704,5 +679,6 @@ Acts::VolumeConfig Acts::CylinderVolumeBuilder::analyzeContent(
   }
 
   // and return what you have
+  std::cout<<"lConfig"<<"=====rMin: "<<lConfig.rMin<<" =====rMax: "<<lConfig.rMax<<std::endl;
   return lConfig;
 }
