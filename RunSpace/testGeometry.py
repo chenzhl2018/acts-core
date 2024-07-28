@@ -1,6 +1,6 @@
 import os 
 
-buildFilePath = "/home/xiaocong/Software/trtActs/build/bin"
+buildFilePath = "/home/xiaocong/Software/acts/trtActs/build/bin"
 configFilePath = "./"
 inputDir = "data/sim_trt"
 outputDir = "data/reco_trt"
@@ -11,7 +11,7 @@ runGeoSimple= f"{buildFilePath}/ActsExampleGeometryTGeo \
   -n 1 -l 0 \
   --geo-volume-loglevel 0 \
   --geo-tgeo-filename {configFilePath}/InnerDetector.tgeo.root \
-  --geo-tgeo-jsonconfig tgeo_atlas_id_test.json \
+  --geo-tgeo-jsonconfig tgeo_atlas_id.json \
   --mat-output-file json_output/geometry-map \
   --output-json true \
   --mat-output-allmaterial true \
@@ -20,8 +20,9 @@ runGeoSimple= f"{buildFilePath}/ActsExampleGeometryTGeo \
 
 runGeoSimulation= f"{buildFilePath}/ActsExampleFatrasTGeo \
   --geo-tgeo-filename {configFilePath}/InnerDetector.tgeo.root \
-  --geo-tgeo-jsonconfig tgeo_atlas_id_test.json \
-  --output-root 1 -l 0 -j 1 --events 1000"
+  --geo-tgeo-jsonconfig tgeo_atlas_id.json \
+  --gen-eta -2.5:2.5 \
+  --output-root 1 -l 0 -j 1 --events 2000"
 
 os.system(runGeoSimple)
 #os.system(runGeoSimulation)

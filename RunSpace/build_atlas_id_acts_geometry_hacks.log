@@ -1,0 +1,1382 @@
+
+
+======================= DEPRECATION NOTICE ========================
+The examples executables is deprecated. They will be removed in a
+future version.
+Consider using the python bindings for the example algorithms: 
+https://acts.readthedocs.io/en/latest/examples/python_bindings.html
+===================================================================
+
+
+=====rMin: 80 =====rMax: 180
+=====rMin: 30 =====rMax: 140
+=====rMin: 80 =====rMax: 180
+=====rMin: 250 =====rMax: 620
+=====rMin: 290 =====rMax: 550
+=====rMin: 250 =====rMax: 620
+=====rMin: 640 =====rMax: 1010
+=====rMin: 565 =====rMax: 1080
+=====rMin: 640 =====rMax: 1010
+15:39:43    PixelVolumeB   DEBUG     Configured to build volume : Pixel
+15:39:43    PixelVolumeB   DEBUG     -> Building layers
+======layerCfg.volumeName.c_str()======EndCap
+=====tVolume=====EndCap
+=====sensor name=====ModuleEC
+=====minR====80
+=====minZ====480
+ splitting into 3 layers.
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 1
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 2
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 3
+======layerCfg.volumeName.c_str()======Barrel
+=====tVolume=====Barrel
+=====sensor name=====ChipBrl
+=====minR====30
+=====minZ====430
+layerCfg.splitConfigs[0]3
+layerCfg.splitConfigs[0]10
+ layer_id 1
+ layer_id 2
+ layer_id 3
+ layer_id 4
+======layerCfg.volumeName.c_str()======EndCap
+=====tVolume=====EndCap
+=====sensor name=====ModuleEC
+=====minR====80
+=====minZ====480
+ splitting into 3 layers.
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 1
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 2
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 3
+15:39:43    PixelVolumeB   DEBUG     -> Building layers complete
+15:39:43    PixelVolumeB   VERBOSE   This layer builder is configured to build to the beamline.
+15:39:43    PixelVolumeB   VERBOSE   This layer builder is configured to build to the beamline.
+15:39:43    PixelVolumeB   VERBOSE   This layer builder is configured to build to the beamline.
+15:39:43    PixelVolumeB   VERBOSE   Negative layers are present: rmin, rmax | zmin, zmax = 0, 153.151 / -654.417, -490.583
+15:39:43    PixelVolumeB   VERBOSE   -> z locations: -495.000000, -580.000000, -650.000000
+15:39:43    PixelVolumeB   VERBOSE   Central layers are present:  rmin, rmax | zmin, zmax = 0, 129.347 / -402.608, 402.608
+15:39:43    PixelVolumeB   VERBOSE   -> radii: 0.000000, 0.000000, 0.000000, 0.000000
+15:39:43    PixelVolumeB   VERBOSE   Positive layers are present: rmin, rmax | zmin, zmax = 0, 153.151 / 490.583, 654.417
+15:39:43    PixelVolumeB   VERBOSE   -> z locations: 495.000000, 580.000000, 650.000000
+15:39:43    PixelVolumeB   DEBUG     Layer configuration is : | Negative Endcap | Barrel | Positive Endcap |
+15:39:43    PixelVolumeB   VERBOSE   Configurations after layer parsing 
+ - n: Negative Endcap, current configuration: 0, 153.151 / -654.417, -490.583
+ - c: Barrel, current          configuration: 0, 129.347 / -402.608, 402.608
+ - p: Negative Endcap, current configuration: 0, 153.151 / 490.583, 654.417
+
+15:39:43    PixelVolumeB   VERBOSE   Configuration after container synchronisation 
+New container built with       configuration: 0, 153.151 / -654.417, 654.417
+ - n: Negative Endcap, current configuration: 0, 153.151 / -654.417, -446.596
+ - c: Barrel, current          configuration: 0, 153.151 / -446.596, 446.596
+ - p: Negative Endcap, current configuration: 0, 153.151 / 446.596, 654.417
+
+15:39:43    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'Pixel::Barrel'.
+15:39:43    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 0 / 153.151 / -446.596 / 446.596
+15:39:43    CylinderVolu   VERBOSE   Parsing the 4 layers to gather overall dimensions
+15:39:43    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (0/153.151/446.596)
+15:39:43    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:43    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 31.0061 / 128.347 / -401.608 / 401.608
+15:39:43    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 0 / 153.151 / -446.596 / 446.596
+15:39:43    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 3
+15:39:43    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :0
+15:39:43    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 446.59574, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:43    PixelVolumeB   DEBUG     =====wConfig.cVolumeConfig.rMin=====0
+15:39:43    PixelVolumeB   DEBUG     =====wConfig.cVolumeConfig.rMan=====153.151
+15:39:43    PixelVolumeB   DEBUG     =====wConfig.cVolumeConfig.zMin=====-446.596
+15:39:43    PixelVolumeB   DEBUG     =====wConfig.cVolumeConfig.zMax=====446.596
+15:39:43    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'Pixel::NegativeEndcap'.
+15:39:43    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 0 / 153.151 / -654.417 / -446.596
+15:39:43    CylinderVolu   VERBOSE   Parsing the 3 layers to gather overall dimensions
+15:39:43    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (0/153.151/103.911)
+15:39:43    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:43    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 86.5903 / 152.151 / -653.417 / -491.583
+15:39:43    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 0 / 153.151 / -654.417 / -446.596
+15:39:43    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:39:43    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :-550.506
+15:39:43    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 103.91054, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:43    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'Pixel::PositiveEndcap'.
+15:39:43    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 0 / 153.151 / 446.596 / 654.417
+15:39:43    CylinderVolu   VERBOSE   Parsing the 3 layers to gather overall dimensions
+15:39:43    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (0/153.151/103.911)
+15:39:43    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:43    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 86.5903 / 152.151 / 491.583 / 653.417
+15:39:43    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 0 / 153.151 / 446.596 / 654.417
+15:39:43    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:39:43    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :550.506
+15:39:43    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 103.91054, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:43    PixelVolumeB   DEBUG     Newly created volume(s) will be grouped to [n][c][p]
+15:39:43    PixelVolumeB   VERBOSE   Combined new container is being built.
+15:39:43    CylinderVolu   VERBOSE   [start] Creating a container volume with 3 sub volumes:
+15:39:43    CylinderVolu   VERBOSE      - volume (0) is : Pixel::NegativeEndcap
+15:39:43    CylinderVolu   VERBOSE        at position : 0, 0, -550.506
+15:39:43    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 103.91054, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:43    CylinderVolu   VERBOSE      - volume (1) is : Pixel::Barrel
+15:39:43    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:39:43    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 446.59574, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:43    CylinderVolu   VERBOSE      - volume (2) is : Pixel::PositiveEndcap
+15:39:43    CylinderVolu   VERBOSE        at position : 0, 0, 550.506
+15:39:43    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 103.91054, 3.14159, 0.00000, 0.00000, 0.00000
+zMin = -654.417, zMax = 654.417, zSep1 = -446.596, zSep2 = -446.596, rMin = 0, rGlueMin = 0, rMax = 153.151
+15:39:43    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 654.41683, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:43    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }'.
+15:39:43    CylinderVolu   VERBOSE   [0] - volume : Pixel::NegativeEndcap
+15:39:43    CylinderVolu   VERBOSE   [1] - volume : Pixel::Barrel
+15:39:43    CylinderVolu   VERBOSE   [2] - volume : Pixel::PositiveEndcap
+15:39:43    CylinderVolu   VERBOSE   z-binning: Processing volume 'Pixel::NegativeEndcap'.
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'Pixel::NegativeEndcap'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+First volume  Pixel::NegativeEndcap
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'Pixel::NegativeEndcap'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'Pixel::NegativeEndcap'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  Pixel::NegativeEndcap and Pixel::Barrel
+rGlueMin =  0
+15:39:43    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'Pixel::NegativeEndcap' has 0 @ BoundarySurfaceFace::positiveFaceXY
+15:39:43    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'Pixel::Barrel' has 0 @ BoundarySurfaceFace::negativeFaceXY
+15:39:43    CylinderVolu   VERBOSE         glue : one[ Pixel::NegativeEndcap @ BoundarySurfaceFace::positiveFaceXY ]-to-one[ Pixel::Barrel @ BoundarySurfaceFace::negativeFaceXY ]
+15:39:43    CylinderVolu   VERBOSE   z-binning: Processing volume 'Pixel::Barrel'.
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'Pixel::Barrel'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'Pixel::Barrel'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  Pixel::Barrel and Pixel::PositiveEndcap
+rGlueMin =  0
+15:39:43    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'Pixel::Barrel' has 0 @ BoundarySurfaceFace::positiveFaceXY
+15:39:43    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'Pixel::PositiveEndcap' has 0 @ BoundarySurfaceFace::negativeFaceXY
+15:39:43    CylinderVolu   VERBOSE         glue : one[ Pixel::Barrel @ BoundarySurfaceFace::positiveFaceXY ]-to-one[ Pixel::PositiveEndcap @ BoundarySurfaceFace::negativeFaceXY ]
+15:39:43    CylinderVolu   VERBOSE   z-binning: Processing volume 'Pixel::PositiveEndcap'.
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'Pixel::PositiveEndcap'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'Pixel::PositiveEndcap'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:43    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'Pixel::PositiveEndcap'.
+15:39:43    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+Last volume  Pixel::PositiveEndcap
+15:39:43    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face negativeFaceXY:
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::NegativeEndcap'
+15:39:43    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face positiveFaceXY: 
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::PositiveEndcap'
+15:39:43    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeInnerCover: 
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::NegativeEndcap'
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::Barrel'
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::PositiveEndcap'
+15:39:43    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeOuterCover:
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::NegativeEndcap
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::Barrel
+15:39:43    CylinderVolu   VERBOSE      -> volume 'Pixel::PositiveEndcap
+15:39:43    CylinderVolu   VERBOSE   [ end ] return newly created container : { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }
+15:39:43    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 654.41683, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:43    SCTVolumeBui   DEBUG     Configured to build volume : SCT
+15:39:43    SCTVolumeBui   DEBUG     - will wrap/enclose : { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }
+15:39:43    SCTVolumeBui   DEBUG     -> Building layers
+======layerCfg.volumeName.c_str()======SCT_ForwardC
+=====tVolume=====SCT_ForwardC
+=====sensor name=====FwdModule0
+=====minR====250
+=====minZ====800
+ splitting into 9 layers.
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 1
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 2
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 3
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 4
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 5
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 6
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 7
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 8
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 9
+======layerCfg.volumeName.c_str()======SCT_Barrel
+=====tVolume=====SCT_Barrel
+=====sensor name=====BRLSensor
+=====minR====290
+=====minZ====770
+layerCfg.splitConfigs[0]3
+layerCfg.splitConfigs[0]30
+ layer_id 1
+ layer_id 2
+ layer_id 3
+ layer_id 4
+======layerCfg.volumeName.c_str()======SCT_ForwardA
+=====tVolume=====SCT_ForwardA
+=====sensor name=====FwdModule0
+=====minR====250
+=====minZ====800
+ splitting into 9 layers.
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 1
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 2
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 3
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 4
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 5
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 6
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 7
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 8
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 9
+15:39:46    SCTVolumeBui   DEBUG     -> Building layers complete
+15:39:46    SCTVolumeBui   VERBOSE   Negative layers are present: rmin, rmax | zmin, zmax = 399.753, 601.537 / -2745.57, -838.425
+15:39:46    SCTVolumeBui   VERBOSE   -> z locations: -843.800000, -924.000000, -1081.500000, -1289.900000, -1389.700000, -1761.400000, -2105.200000, -2495.000000, -2740.200000
+15:39:46    SCTVolumeBui   VERBOSE   Central layers are present:  rmin, rmax | zmin, zmax = 291.112, 525.053 / -746.295, 746.295
+15:39:46    SCTVolumeBui   VERBOSE   -> radii: 0.000000, 0.000000, 0.000000, 0.000000
+15:39:46    SCTVolumeBui   VERBOSE   Positive layers are present: rmin, rmax | zmin, zmax = 399.753, 601.537 / 838.425, 2745.57
+15:39:46    SCTVolumeBui   VERBOSE   -> z locations: 843.800000, 924.000000, 1081.500000, 1289.900000, 1389.700000, 1761.400000, 2105.200000, 2495.000000, 2740.200000
+15:39:46    SCTVolumeBui   DEBUG     Layer configuration is : | Negative Endcap | Barrel | Positive Endcap |
+15:39:46    SCTVolumeBui   VERBOSE   Configurations after layer parsing 
+ - n: Negative Endcap, current configuration: 399.753, 601.537 / -2745.57, -838.425
+ - c: Barrel, current          configuration: 291.112, 525.053 / -746.295, 746.295
+ - p: Negative Endcap, current configuration: 399.753, 601.537 / 838.425, 2745.57
+Existing volume with           configuration: 0, 153.151 / -654.417, 654.417
+
+15:39:46    SCTVolumeBui   VERBOSE   Configuration after container synchronisation 
+New container built with       configuration: 291.112, 601.537 / -2745.57, 2745.57
+ - n: Negative Endcap, current configuration: 399.753, 601.537 / -2745.57, -792.36
+ - c: Barrel, current          configuration: 291.112, 525.053 / -792.36, 792.36
+ - p: Negative Endcap, current configuration: 399.753, 601.537 / 792.36, 2745.57
+Existing volume with           configuration: 0, 153.151 / -654.417, 654.417
+WrappingCondition = 3
+
+WARNING: [fully wrapped] manually set the SCT barrel rMax to 550 mm 
+negative gap 
+15:39:46    SCTVolumeBui   VERBOSE   Configuration after wrapping, insertion, attachment 
+New container built with       configuration: 291.112, 601.537 / -2745.57, 2745.57
+ - n: Negative Endcap, current configuration: 153.151, 601.537 / -2745.57, -792.36
+ - c: Barrel, current          configuration: 153.151, 550 / -792.36, 792.36
+ - p: Negative Endcap, current configuration: 153.151, 601.537 / 792.36, 2745.57
+Existing volume with           configuration: 0, 153.151 / -654.417, 654.417
+ - g1: First gap volume,       configuration : 0, 153.151 / -2745.57, -654.417
+ - g2: Second gap volume,      configuration : 0, 153.151 / 654.417, 2745.57
+WrappingCondition = 3
+
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'SCT::Barrel'.
+15:39:46    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 153.151 / 550 / -792.36 / 792.36
+15:39:46    CylinderVolu   VERBOSE   Parsing the 4 layers to gather overall dimensions
+15:39:46    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (153.151/550/792.36)
+15:39:46    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:46    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 292.112 / 524.053 / -745.295 / 745.295
+15:39:46    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 153.151 / 550 / -792.36 / 792.36
+15:39:46    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 3
+15:39:46    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :0
+15:39:46    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 550.00000, 792.35982, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    SCTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.rMin=====153.151
+15:39:46    SCTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.rMan=====550
+15:39:46    SCTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.zMin=====-792.36
+15:39:46    SCTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.zMax=====792.36
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'SCT::NegativeEndcap'.
+15:39:46    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 153.151 / 601.537 / -2745.57 / -792.36
+15:39:46    CylinderVolu   VERBOSE   Parsing the 9 layers to gather overall dimensions
+15:39:46    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (153.151/601.537/976.608)
+15:39:46    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:46    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 400.753 / 600.537 / -2744.57 / -839.425
+15:39:46    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 153.151 / 601.537 / -2745.57 / -792.36
+15:39:46    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:39:46    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :-1768.97
+15:39:46    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'SCT::PositiveEndcap'.
+15:39:46    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 153.151 / 601.537 / 792.36 / 2745.57
+15:39:46    CylinderVolu   VERBOSE   Parsing the 9 layers to gather overall dimensions
+15:39:46    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (153.151/601.537/976.608)
+15:39:46    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:46    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 400.753 / 600.537 / 839.425 / 2744.57
+15:39:46    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 153.151 / 601.537 / 792.36 / 2745.57
+15:39:46    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:39:46    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :1768.97
+15:39:46    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    SCTVolumeBui   DEBUG     Newly created volume(s) will be [fully wrapped]
+15:39:46    SCTVolumeBui   VERBOSE   Combined new container is being built.
+15:39:46    CylinderVolu   VERBOSE   [start] Creating a container volume with 3 sub volumes:
+15:39:46    CylinderVolu   VERBOSE      - volume (0) is : SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, -1768.97
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE      - volume (1) is : SCT::Barrel
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 550.00000, 792.35982, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE      - volume (2) is : SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, 1768.97
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+zMin = -2745.57, zMax = 2745.57, zSep1 = -792.36, zSep2 = -792.36, rMin = 153.151, rGlueMin = 0, rMax = 601.537
+15:39:46    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }'.
+15:39:46    CylinderVolu   VERBOSE   [0] - volume : SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE   [1] - volume : SCT::Barrel
+15:39:46    CylinderVolu   VERBOSE   [2] - volume : SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   z-binning: Processing volume 'SCT::NegativeEndcap'.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'SCT::NegativeEndcap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+First volume  SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::NegativeEndcap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'SCT::NegativeEndcap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  SCT::NegativeEndcap and SCT::Barrel
+rGlueMin =  0
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::NegativeEndcap' has 0 @ BoundarySurfaceFace::positiveFaceXY
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::Barrel' has 0 @ BoundarySurfaceFace::negativeFaceXY
+15:39:46    CylinderVolu   VERBOSE         glue : one[ SCT::NegativeEndcap @ BoundarySurfaceFace::positiveFaceXY ]-to-one[ SCT::Barrel @ BoundarySurfaceFace::negativeFaceXY ]
+15:39:46    CylinderVolu   VERBOSE   z-binning: Processing volume 'SCT::Barrel'.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::Barrel'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'SCT::Barrel'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  SCT::Barrel and SCT::PositiveEndcap
+rGlueMin =  0
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::Barrel' has 0 @ BoundarySurfaceFace::positiveFaceXY
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::PositiveEndcap' has 0 @ BoundarySurfaceFace::negativeFaceXY
+15:39:46    CylinderVolu   VERBOSE         glue : one[ SCT::Barrel @ BoundarySurfaceFace::positiveFaceXY ]-to-one[ SCT::PositiveEndcap @ BoundarySurfaceFace::negativeFaceXY ]
+15:39:46    CylinderVolu   VERBOSE   z-binning: Processing volume 'SCT::PositiveEndcap'.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::PositiveEndcap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'SCT::PositiveEndcap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'SCT::PositiveEndcap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+Last volume  SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face negativeFaceXY:
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face positiveFaceXY: 
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeInnerCover: 
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::Barrel'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeOuterCover:
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::Barrel
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   [ end ] return newly created container : { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical gap TrackingVolume 'SCT::fGap' with (rMin/rMax/zMin/Max) = 
+15:39:46    CylinderVolu   VERBOSE   	0 / 153.151 / -2745.57 / -654.417
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical gap TrackingVolume 'SCT::fGap' with (rMin/rMax/zMin/Max) = 
+15:39:46    CylinderVolu   VERBOSE   	0 / 153.151 / -2745.57 / -654.417
+15:39:46    CylinderVolu   VERBOSE   Creating a DiscLayer at position -1700 and rMin/rMax 0 / 153.151
+15:39:46    CylinderVolu   VERBOSE    -> Preparing the binned material with 100 bins in R. 
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'SCT::fGap'.
+15:39:46    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 0 / 153.151 / -2745.57 / -654.417
+15:39:46    CylinderVolu   VERBOSE   Parsing the 1 layers to gather overall dimensions
+15:39:46    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (0/153.151/1045.58)
+15:39:46    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:46    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 0 / 153.151 / -1700.5 / -1699.5
+15:39:46    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 0 / 153.151 / -2745.57 / -654.417
+15:39:46    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:39:46    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :-1700
+15:39:46    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 1045.57909, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical gap TrackingVolume 'SCT::sGap' with (rMin/rMax/zMin/Max) = 
+15:39:46    CylinderVolu   VERBOSE   	0 / 153.151 / 654.417 / 2745.57
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical gap TrackingVolume 'SCT::sGap' with (rMin/rMax/zMin/Max) = 
+15:39:46    CylinderVolu   VERBOSE   	0 / 153.151 / 654.417 / 2745.57
+15:39:46    CylinderVolu   VERBOSE   Creating a DiscLayer at position 1700 and rMin/rMax 0 / 153.151
+15:39:46    CylinderVolu   VERBOSE    -> Preparing the binned material with 100 bins in R. 
+15:39:46    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'SCT::sGap'.
+15:39:46    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 0 / 153.151 / 654.417 / 2745.57
+15:39:46    CylinderVolu   VERBOSE   Parsing the 1 layers to gather overall dimensions
+15:39:46    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (0/153.151/1045.58)
+15:39:46    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:39:46    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 0 / 153.151 / 1699.5 / 1700.5
+15:39:46    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 0 / 153.151 / 654.417 / 2745.57
+15:39:46    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:39:46    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :1700
+15:39:46    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 1045.57909, 3.14159, 0.00000, 0.00000, 0.00000
+existingContainer.size() = 3
+15:39:46    CylinderVolu   VERBOSE   [start] Creating a container volume with 3 sub volumes:
+15:39:46    CylinderVolu   VERBOSE      - volume (0) is : SCT::fGap
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, -1700
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 1045.57909, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE      - volume (1) is : { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 654.41683, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE      - volume (2) is : SCT::sGap
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, 1700
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 1045.57909, 3.14159, 0.00000, 0.00000, 0.00000
+zMin = -2745.57, zMax = 2745.57, zSep1 = -654.417, zSep2 = -654.417, rMin = 0, rGlueMin = 0, rMax = 153.151
+15:39:46    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }'.
+15:39:46    CylinderVolu   VERBOSE   [0] - volume : SCT::fGap
+15:39:46    CylinderVolu   VERBOSE   [1] - volume : { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }
+15:39:46    CylinderVolu   VERBOSE   [2] - volume : SCT::sGap
+15:39:46    CylinderVolu   VERBOSE   z-binning: Processing volume 'SCT::fGap'.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'SCT::fGap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+First volume  SCT::fGap
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::fGap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'SCT::fGap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  SCT::fGap and { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }
+rGlueMin =  0
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::fGap' has 0 @ BoundarySurfaceFace::positiveFaceXY
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }' has 1 @ BoundarySurfaceFace::negativeFaceXY
+15:39:46    CylinderVolu   VERBOSE         glue : one[ SCT::fGap @ BoundarySurfaceFace::positiveFaceXY ]-to-one[ Pixel::NegativeEndcap @ BoundarySurfaceFace::negativeFaceXY ]
+15:39:46    CylinderVolu   VERBOSE   z-binning: Processing volume '{ Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }'.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume '{ Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::Barrel
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   4 navigation volumes registered as glue volumes.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume '{ Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::Barrel
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   4 navigation volumes registered as glue volumes.
+glue volume  { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } and SCT::sGap
+rGlueMin =  0
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }' has 1 @ BoundarySurfaceFace::positiveFaceXY
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::sGap' has 0 @ BoundarySurfaceFace::negativeFaceXY
+15:39:46    CylinderVolu   VERBOSE         glue : one[ Pixel::PositiveEndcap @ BoundarySurfaceFace::positiveFaceXY ]-to-one[ SCT::sGap @ BoundarySurfaceFace::negativeFaceXY ]
+15:39:46    CylinderVolu   VERBOSE   z-binning: Processing volume 'SCT::sGap'.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::sGap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'SCT::sGap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'SCT::sGap'.
+15:39:46    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+Last volume  SCT::sGap
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face negativeFaceXY:
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::fGap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face positiveFaceXY: 
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::sGap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 5 volumes at face tubeInnerCover: 
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::fGap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::NegativeEndcap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::Barrel'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::PositiveEndcap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::sGap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 5 volumes at face tubeOuterCover:
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::fGap
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::Barrel
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::sGap
+15:39:46    CylinderVolu   VERBOSE   [ end ] return newly created container : { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE   [start] Creating a container volume with 2 sub volumes:
+15:39:46    CylinderVolu   VERBOSE      - volume (0) is : { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE      - volume (1) is : { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }
+15:39:46    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+rCase: zMin = -2745.57, zMax = 2745.57, zSep1 = -2745.57, zSep2 = 2745.57, rMin = 0, rGlueMin = 153.151, rMax = 601.537
+15:39:46    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 601.53738, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } | { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap } }'.
+15:39:46    CylinderVolu   VERBOSE   [0] - volume : { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:39:46    CylinderVolu   VERBOSE   [1] - volume : { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }
+15:39:46    CylinderVolu   VERBOSE   r-binning: Processing volume [0]
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::fGap
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::Barrel
+15:39:46    CylinderVolu   VERBOSE      -> adding : Pixel::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::sGap
+15:39:46    CylinderVolu   VERBOSE   5 navigation volumes registered as glue volumes.
+First volume  { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::fGap
+15:39:46    CylinderVolu   VERBOSE   1 navigation volumes registered as glue volumes.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::sGap
+15:39:46    CylinderVolu   VERBOSE   1 navigation volumes registered as glue volumes.
+glue volume  { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } and { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }
+rGlueR = 153.151
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }' has 5 @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha
+15:39:46    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }' has 3 @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta
+15:39:46    CylinderVolu   VERBOSE         glue : many[ { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha ]-to-many[ { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap } @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta ]
+15:39:46    CylinderVolu   VERBOSE                creating a new cylindrical boundary surface with bounds = Acts::CylinderBounds: (radius, halfLengthZ, halfPhiSector, averagePhi, bevelMinZ, bevelMaxZ) = (153.1508327, 2745.5750000, 3.1415927, 0.0000000, 0.0000000, 0.0000000)
+15:39:46    CylinderVolu   VERBOSE                at 0 0 0
+15:39:46    CylinderVolu   VERBOSE   New Boundary surface setting for containers
+15:39:46    CylinderVolu   VERBOSE    - at first volume: { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::fGap
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: Pixel::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: Pixel::Barrel
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: Pixel::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::sGap
+15:39:46    CylinderVolu   VERBOSE    - at second volume: { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::Barrel
+15:39:46    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   r-binning: Processing volume [1]
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume '{ SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE   2 navigation volumes registered as glue volumes.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume '{ SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   2 navigation volumes registered as glue volumes.
+15:39:46    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume '{ SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }'.
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::Barrel
+15:39:46    CylinderVolu   VERBOSE      -> adding : SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   3 navigation volumes registered as glue volumes.
+Last volume  { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap }
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face negativeFaceXY:
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::fGap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face positiveFaceXY: 
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::sGap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 5 volumes at face tubeInnerCover: 
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::fGap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::NegativeEndcap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::Barrel'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'Pixel::PositiveEndcap'
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::sGap'
+15:39:46    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeOuterCover:
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::Barrel
+15:39:46    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap
+15:39:46    CylinderVolu   VERBOSE   [ end ] return newly created container : { { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } | { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap } }
+15:39:46    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 601.53738, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:39:46    TRTVolumeBui   DEBUG     Configured to build volume : TRT
+15:39:46    TRTVolumeBui   DEBUG     - will wrap/enclose : { { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } | { SCT::NegativeEndcap | SCT::Barrel | SCT::PositiveEndcap } }
+15:39:46    TRTVolumeBui   DEBUG     -> Building layers
+======layerCfg.volumeName.c_str()======TRTEndcapWheelAB
+=====tVolume=====TRTEndcapWheelAB
+=====sensor name=====Straw
+=====minR====640
+=====minZ====840
+ splitting into 16 layers.
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 1
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 2
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 3
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 4
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 5
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 6
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 7
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 8
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 9
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 10
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 11
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 12
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 13
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 14
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 15
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 16
+======layerCfg.volumeName.c_str()======TRTBarrel
+=====tVolume=====TRTBarrel
+=====sensor name=====StrawM
+=====minR====565
+=====minZ====720
+layerCfg.splitConfigs[0]3
+layerCfg.splitConfigs[0]10
+ layer_id 1
+ layer_id 2
+ layer_id 3
+ layer_id 4
+ layer_id 5
+ layer_id 6
+ layer_id 7
+ layer_id 8
+ layer_id 9
+ layer_id 10
+ layer_id 11
+ layer_id 12
+ layer_id 13
+ layer_id 14
+ layer_id 15
+ layer_id 16
+ layer_id 17
+ layer_id 18
+ layer_id 19
+ layer_id 20
+ layer_id 21
+ layer_id 22
+ layer_id 23
+ layer_id 24
+ layer_id 25
+ layer_id 26
+ layer_id 27
+ layer_id 28
+ layer_id 29
+ layer_id 30
+ layer_id 31
+ layer_id 32
+ layer_id 33
+ layer_id 34
+ layer_id 35
+ layer_id 36
+ layer_id 37
+ layer_id 38
+ layer_id 39
+ layer_id 40
+ layer_id 41
+ layer_id 42
+ layer_id 43
+ layer_id 44
+ layer_id 45
+ layer_id 46
+ layer_id 47
+ layer_id 48
+ layer_id 49
+ layer_id 50
+ layer_id 51
+======layerCfg.volumeName.c_str()======TRTEndcapWheelAB
+=====tVolume=====TRTEndcapWheelAB
+=====sensor name=====Straw
+=====minR====640
+=====minZ====840
+ splitting into 16 layers.
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 1
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 2
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 3
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 4
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 5
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 6
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 7
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 8
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 9
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 10
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 11
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 12
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 13
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 14
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 15
+lCfg.envelope.first1
+lCfg.envelope.second1
+ layer_id 16
+15:41:25    TRTVolumeBui   DEBUG     -> Building layers complete
+15:41:25    TRTVolumeBui   VERBOSE   Negative layers are present: rmin, rmax | zmin, zmax = 643, 1005 / -987.5, -856.5
+15:41:25    TRTVolumeBui   VERBOSE   -> z locations: -858.500003, -866.500003, -874.500004, -882.500004, -892.500004, -900.500004, -908.500004, -916.500004, -927.500000, -935.500000, -943.500000, -951.500000, -961.500000, -969.500000, -977.500000, -985.500000
+15:41:25    TRTVolumeBui   VERBOSE   Central layers are present:  rmin, rmax | zmin, zmax = 567.901, 1070.44 / -715.793, 715.793
+15:41:25    TRTVolumeBui   VERBOSE   -> radii: 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000
+15:41:25    TRTVolumeBui   VERBOSE   Positive layers are present: rmin, rmax | zmin, zmax = 643, 1005 / 856.5, 987.5
+15:41:25    TRTVolumeBui   VERBOSE   -> z locations: 858.500003, 866.500003, 874.500004, 882.500004, 892.500004, 900.500004, 908.500004, 916.500004, 927.500000, 935.500000, 943.500000, 951.500000, 961.500000, 969.500000, 977.500000, 985.500000
+15:41:25    TRTVolumeBui   DEBUG     Layer configuration is : | Negative Endcap | Barrel | Positive Endcap |
+15:41:25    TRTVolumeBui   VERBOSE   Configurations after layer parsing 
+ - n: Negative Endcap, current configuration: 643, 1005 / -987.5, -856.5
+ - c: Barrel, current          configuration: 567.901, 1070.44 / -715.793, 715.793
+ - p: Negative Endcap, current configuration: 643, 1005 / 856.5, 987.5
+Existing volume with           configuration: 0, 601.537 / -2745.57, 2745.57
+
+15:41:25    TRTVolumeBui   VERBOSE   Configuration after container synchronisation 
+New container built with       configuration: 567.901, 1070.44 / -987.5, 987.5
+ - n: Negative Endcap, current configuration: 643, 1005 / -987.5, -786.146
+ - c: Barrel, current          configuration: 567.901, 1070.44 / -786.146, 786.146
+ - p: Negative Endcap, current configuration: 643, 1005 / 786.146, 987.5
+Existing volume with           configuration: 0, 601.537 / -2745.57, 2745.57
+WrappingCondition = 3
+
+WARNING: [CentralWrapping] manually set the TRT barrel rMin to 550 mm 
+15:41:25    TRTVolumeBui   VERBOSE   Configuration after wrapping, insertion, attachment 
+New container built with       configuration: 567.901, 1070.44 / -987.5, 987.5
+ - n: Negative Endcap, current configuration: 601.537, 1070.44 / -2745.57, -786.146
+ - c: Barrel, current          configuration: 550, 1070.44 / -786.146, 786.146
+ - p: Negative Endcap, current configuration: 601.537, 1070.44 / 786.146, 2745.57
+Existing volume with           configuration: 0, 601.537 / -2745.57, 2745.57
+WrappingCondition = 5
+
+15:41:25    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'TRT::Barrel'.
+15:41:25    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 550 / 1070.44 / -786.146 / 786.146
+15:41:25    CylinderVolu   VERBOSE   Parsing the 51 layers to gather overall dimensions
+15:41:25    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (550/1070.44/786.146)
+15:41:25    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:41:25    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 568.901 / 1069.44 / -714.793 / 714.793
+15:41:25    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 550 / 1070.44 / -786.146 / 786.146
+15:41:25    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 3
+15:41:25    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :0
+15:41:25    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 550.00000, 1070.44496, 786.14625, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    TRTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.rMin=====550
+15:41:25    TRTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.rMan=====1070.44
+15:41:25    TRTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.zMin=====-786.146
+15:41:25    TRTVolumeBui   DEBUG     =====wConfig.cVolumeConfig.zMax=====786.146
+15:41:25    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'TRT::NegativeEndcap'.
+15:41:25    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 601.537 / 1070.44 / -2745.57 / -786.146
+15:41:25    CylinderVolu   VERBOSE   Parsing the 16 layers to gather overall dimensions
+15:41:25    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (601.537/1070.44/979.714)
+15:41:25    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:41:25    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 644 / 1004 / -986.5 / -857.5
+15:41:25    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 601.537 / 1070.44 / -2745.57 / -786.146
+15:41:25    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:41:25    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :-1765.86
+15:41:25    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 601.53738, 1070.44496, 979.71437, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   Create cylindrical TrackingVolume 'TRT::PositiveEndcap'.
+15:41:25    CylinderVolu   VERBOSE       -> with given dimensions of (rMin/rMax/zMin/Max) = 601.537 / 1070.44 / 786.146 / 2745.57
+15:41:25    CylinderVolu   VERBOSE   Parsing the 16 layers to gather overall dimensions
+15:41:25    CylinderVolu   VERBOSE   Cylinder volume bounds are given: (rmin/rmax/dz) = (601.537/1070.44/979.714)
+15:41:25    CylinderVolu   VERBOSE   Estimate/check CylinderVolumeBounds from/w.r.t. enclosed layers + envelope covers
+15:41:25    CylinderVolu   VERBOSE       -> dimensions from layers   (rMin/rMax/zMin/zMax) = 644 / 1004 / 857.5 / 986.5
+15:41:25    CylinderVolu   VERBOSE       -> while created bounds are (rMin/rMax/zMin/zMax) = 601.537 / 1070.44 / 786.146 / 2745.57
+15:41:25    CylinderVolu   VERBOSE   Filling the layers into an appropriate layer array - with binningValue = 2
+15:41:25    CylinderVolu   VERBOSE   Created cylindrical volume at z-position :1765.86
+15:41:25    CylinderVolu   VERBOSE      created bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 601.53738, 1070.44496, 979.71437, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    TRTVolumeBui   DEBUG     Newly created volume(s) will be [CentralWrapping]
+existingContainer.size() = 1
+The first volume has name { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+sub SCT has name SCT::NegativeEndcap
+sub SCT has name SCT::Barrel
+sub SCT has name SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   [start] Creating a container volume with 2 sub volumes:
+15:41:25    CylinderVolu   VERBOSE      - volume (0) is : SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, -1768.97
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE      - volume (1) is : TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, -1765.86
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 601.53738, 1070.44496, 979.71437, 3.14159, 0.00000, 0.00000, 0.00000
+rCase: zMin = -2745.57, zMax = -792.36, zSep1 = -2745.57, zSep2 = -792.36, rMin = 153.151, rGlueMin = 601.537, rMax = 1070.44
+15:41:25    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ SCT::NegativeEndcap | TRT::NegativeEndcap }'.
+15:41:25    CylinderVolu   VERBOSE   [0] - volume : SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   [1] - volume : TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [0]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::NegativeEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+First volume  SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'SCT::NegativeEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'SCT::NegativeEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  SCT::NegativeEndcap and TRT::NegativeEndcap
+rGlueR = 601.537
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::NegativeEndcap' has 0 @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'TRT::NegativeEndcap' has 0 @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta
+15:41:25    CylinderVolu   VERBOSE         glue : one[ SCT::NegativeEndcap @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha ]-to-one[ TRT::NegativeEndcap @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta ]
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [1]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'TRT::NegativeEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'TRT::NegativeEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'TRT::NegativeEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+Last volume  TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face negativeFaceXY:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face positiveFaceXY: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face tubeInnerCover: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face tubeOuterCover:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   [ end ] return newly created container : { SCT::NegativeEndcap | TRT::NegativeEndcap }
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   [start] Creating a container volume with 2 sub volumes:
+15:41:25    CylinderVolu   VERBOSE      - volume (0) is : SCT::Barrel
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 550.00000, 792.35982, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE      - volume (1) is : TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 550.00000, 1070.44496, 786.14625, 3.14159, 0.00000, 0.00000, 0.00000
+rCase: zMin = -792.36, zMax = 792.36, zSep1 = -792.36, zSep2 = 792.36, rMin = 153.151, rGlueMin = 550, rMax = 1070.44
+15:41:25    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 792.35982, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ SCT::Barrel | TRT::Barrel }'.
+15:41:25    CylinderVolu   VERBOSE   [0] - volume : SCT::Barrel
+15:41:25    CylinderVolu   VERBOSE   [1] - volume : TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [0]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::Barrel'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+First volume  SCT::Barrel
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'SCT::Barrel'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'SCT::Barrel'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  SCT::Barrel and TRT::Barrel
+rGlueR = 550
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::Barrel' has 0 @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'TRT::Barrel' has 0 @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta
+15:41:25    CylinderVolu   VERBOSE         glue : one[ SCT::Barrel @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha ]-to-one[ TRT::Barrel @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta ]
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [1]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'TRT::Barrel'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'TRT::Barrel'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'TRT::Barrel'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+Last volume  TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face negativeFaceXY:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::Barrel'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::Barrel'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face positiveFaceXY: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::Barrel'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::Barrel'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face tubeInnerCover: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::Barrel'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face tubeOuterCover:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE   [ end ] return newly created container : { SCT::Barrel | TRT::Barrel }
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 792.35982, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   [start] Creating a container volume with 2 sub volumes:
+15:41:25    CylinderVolu   VERBOSE      - volume (0) is : SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 1768.97
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 601.53738, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE      - volume (1) is : TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 1765.86
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 601.53738, 1070.44496, 979.71437, 3.14159, 0.00000, 0.00000, 0.00000
+rCase: zMin = 792.36, zMax = 2745.57, zSep1 = 792.36, zSep2 = 2745.57, rMin = 153.151, rGlueMin = 601.537, rMax = 1070.44
+15:41:25    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ SCT::PositiveEndcap | TRT::PositiveEndcap }'.
+15:41:25    CylinderVolu   VERBOSE   [0] - volume : SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   [1] - volume : TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [0]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume 'SCT::PositiveEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+First volume  SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'SCT::PositiveEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'SCT::PositiveEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+glue volume  SCT::PositiveEndcap and TRT::PositiveEndcap
+rGlueR = 601.537
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'SCT::PositiveEndcap' has 0 @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume 'TRT::PositiveEndcap' has 0 @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta
+15:41:25    CylinderVolu   VERBOSE         glue : one[ SCT::PositiveEndcap @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha ]-to-one[ TRT::PositiveEndcap @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta ]
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [1]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume 'TRT::PositiveEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume 'TRT::PositiveEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume 'TRT::PositiveEndcap'.
+15:41:25    CylinderVolu   VERBOSE        -> adding only volume itself (at navigation level).
+Last volume  TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face negativeFaceXY:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face positiveFaceXY: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face tubeInnerCover: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 1 volumes at face tubeOuterCover:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   [ end ] return newly created container : { SCT::PositiveEndcap | TRT::PositiveEndcap }
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   [start] Creating a container volume with 3 sub volumes:
+15:41:25    CylinderVolu   VERBOSE      - volume (0) is : { SCT::NegativeEndcap | TRT::NegativeEndcap }
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, -1768.97
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE      - volume (1) is : { SCT::Barrel | TRT::Barrel }
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 792.35982, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE      - volume (2) is : { SCT::PositiveEndcap | TRT::PositiveEndcap }
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 1768.97
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 976.60759, 3.14159, 0.00000, 0.00000, 0.00000
+zMin = -2745.57, zMax = 2745.57, zSep1 = -792.36, zSep2 = -792.36, rMin = 153.151, rGlueMin = 0, rMax = 1070.44
+15:41:25    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }'.
+15:41:25    CylinderVolu   VERBOSE   [0] - volume : { SCT::NegativeEndcap | TRT::NegativeEndcap }
+15:41:25    CylinderVolu   VERBOSE   [1] - volume : { SCT::Barrel | TRT::Barrel }
+15:41:25    CylinderVolu   VERBOSE   [2] - volume : { SCT::PositiveEndcap | TRT::PositiveEndcap }
+15:41:25    CylinderVolu   VERBOSE   z-binning: Processing volume '{ SCT::NegativeEndcap | TRT::NegativeEndcap }'.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume '{ SCT::NegativeEndcap | TRT::NegativeEndcap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   2 navigation volumes registered as glue volumes.
+First volume  { SCT::NegativeEndcap | TRT::NegativeEndcap }
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume '{ SCT::NegativeEndcap | TRT::NegativeEndcap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   1 navigation volumes registered as glue volumes.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume '{ SCT::NegativeEndcap | TRT::NegativeEndcap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   1 navigation volumes registered as glue volumes.
+glue volume  { SCT::NegativeEndcap | TRT::NegativeEndcap } and { SCT::Barrel | TRT::Barrel }
+rGlueMin =  0
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ SCT::NegativeEndcap | TRT::NegativeEndcap }' has 2 @ BoundarySurfaceFace::positiveFaceXY
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ SCT::Barrel | TRT::Barrel }' has 2 @ BoundarySurfaceFace::negativeFaceXY
+15:41:25    CylinderVolu   VERBOSE         glue : many[ { SCT::NegativeEndcap | TRT::NegativeEndcap } @ BoundarySurfaceFace::positiveFaceXY ]-to-many[ { SCT::Barrel | TRT::Barrel } @ BoundarySurfaceFace::negativeFaceXY ]
+15:41:25    CylinderVolu   VERBOSE                creating a new disc-like boundary surface with bounds = Acts::RadialBounds:  (innerRadius, outerRadius, hPhiSector, averagePhi) = (153.1508327, 1070.4449644, 3.1415927, 0.0000000)
+15:41:25    CylinderVolu   VERBOSE                at       0       0 -792.36
+15:41:25    CylinderVolu   VERBOSE   New Boundary surface setting for containers
+15:41:25    CylinderVolu   VERBOSE    - at first volume: { SCT::NegativeEndcap | TRT::NegativeEndcap }
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE    - at second volume: { SCT::Barrel | TRT::Barrel }
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::Barrel
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE   z-binning: Processing volume '{ SCT::Barrel | TRT::Barrel }'.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume '{ SCT::Barrel | TRT::Barrel }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::Barrel
+15:41:25    CylinderVolu   VERBOSE   2 navigation volumes registered as glue volumes.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume '{ SCT::Barrel | TRT::Barrel }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE   2 navigation volumes registered as glue volumes.
+glue volume  { SCT::Barrel | TRT::Barrel } and { SCT::PositiveEndcap | TRT::PositiveEndcap }
+rGlueMin =  0
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ SCT::Barrel | TRT::Barrel }' has 2 @ BoundarySurfaceFace::positiveFaceXY
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ SCT::PositiveEndcap | TRT::PositiveEndcap }' has 2 @ BoundarySurfaceFace::negativeFaceXY
+15:41:25    CylinderVolu   VERBOSE         glue : many[ { SCT::Barrel | TRT::Barrel } @ BoundarySurfaceFace::positiveFaceXY ]-to-many[ { SCT::PositiveEndcap | TRT::PositiveEndcap } @ BoundarySurfaceFace::negativeFaceXY ]
+15:41:25    CylinderVolu   VERBOSE                creating a new disc-like boundary surface with bounds = Acts::RadialBounds:  (innerRadius, outerRadius, hPhiSector, averagePhi) = (153.1508327, 1070.4449644, 3.1415927, 0.0000000)
+15:41:25    CylinderVolu   VERBOSE                at      0      0 792.36
+15:41:25    CylinderVolu   VERBOSE   New Boundary surface setting for containers
+15:41:25    CylinderVolu   VERBOSE    - at first volume: { SCT::Barrel | TRT::Barrel }
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::Barrel
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE    - at second volume: { SCT::PositiveEndcap | TRT::PositiveEndcap }
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   z-binning: Processing volume '{ SCT::PositiveEndcap | TRT::PositiveEndcap }'.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume '{ SCT::PositiveEndcap | TRT::PositiveEndcap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   3 navigation volumes registered as glue volumes.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume '{ SCT::PositiveEndcap | TRT::PositiveEndcap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   3 navigation volumes registered as glue volumes.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume '{ SCT::PositiveEndcap | TRT::PositiveEndcap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   2 navigation volumes registered as glue volumes.
+Last volume  { SCT::PositiveEndcap | TRT::PositiveEndcap }
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face negativeFaceXY:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 2 volumes at face positiveFaceXY: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeInnerCover: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::Barrel'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeOuterCover:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   [ end ] return newly created container : { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   [start] Creating a container volume with 2 sub volumes:
+15:41:25    CylinderVolu   VERBOSE      - volume (0) is : { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 153.15083, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE      - volume (1) is : { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }
+15:41:25    CylinderVolu   VERBOSE        at position : 0, 0, 0
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 153.15083, 1070.44496, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+rCase: zMin = -2745.57, zMax = 2745.57, zSep1 = -2745.57, zSep2 = 2745.57, rMin = 0, rGlueMin = 153.151, rMax = 1070.44
+15:41:25    CylinderVolu   VERBOSE   Container volume bounds are Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 1070.44496, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+15:41:25    CylinderVolu   VERBOSE   Glue contained TrackingVolumes of container '{ { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } | { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } } }'.
+15:41:25    CylinderVolu   VERBOSE   [0] - volume : { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:41:25    CylinderVolu   VERBOSE   [1] - volume : { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [0]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta for the volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::fGap
+15:41:25    CylinderVolu   VERBOSE      -> adding : Pixel::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE      -> adding : Pixel::Barrel
+15:41:25    CylinderVolu   VERBOSE      -> adding : Pixel::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::sGap
+15:41:25    CylinderVolu   VERBOSE   5 navigation volumes registered as glue volumes.
+First volume  { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::fGap
+15:41:25    CylinderVolu   VERBOSE   1 navigation volumes registered as glue volumes.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::sGap
+15:41:25    CylinderVolu   VERBOSE   1 navigation volumes registered as glue volumes.
+glue volume  { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } and { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }
+rGlueR = 153.151
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }' has 5 @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha
+15:41:25    CylinderVolu   VERBOSE   GlueVolumeDescriptor of volume '{ { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }' has 3 @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta
+15:41:25    CylinderVolu   VERBOSE         glue : many[ { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } @ BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha ]-to-many[ { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } } @ BoundarySurfaceFace::positiveFaceYZ|tubeInnerCover|tubeSectorInnerCover|trapezoidFaceBeta ]
+15:41:25    CylinderVolu   VERBOSE                creating a new cylindrical boundary surface with bounds = Acts::CylinderBounds: (radius, halfLengthZ, halfPhiSector, averagePhi, bevelMinZ, bevelMaxZ) = (153.1508327, 2745.5750000, 3.1415927, 0.0000000, 0.0000000, 0.0000000)
+15:41:25    CylinderVolu   VERBOSE                at 0 0 0
+15:41:25    CylinderVolu   VERBOSE   New Boundary surface setting for containers
+15:41:25    CylinderVolu   VERBOSE    - at first volume: { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::fGap
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: Pixel::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: Pixel::Barrel
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: Pixel::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::sGap
+15:41:25    CylinderVolu   VERBOSE    - at second volume: { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::Barrel
+15:41:25    CylinderVolu   VERBOSE    -> setting boundary surface to volume: SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   r-binning: Processing volume [1]
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceXY for the volume '{ { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE   3 navigation volumes registered as glue volumes.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::positiveFaceXY for the volume '{ { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : SCT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   3 navigation volumes registered as glue volumes.
+15:41:25    CylinderVolu   VERBOSE   Adding face volumes of face BoundarySurfaceFace::negativeFaceYZ|cylinderCover|tubeOuterCover|tubeSectorOuterCover|trapezoidFaceAlpha for the volume '{ { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }'.
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE      -> adding : TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   3 navigation volumes registered as glue volumes.
+Last volume  { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face negativeFaceXY:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::fGap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face positiveFaceXY: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::sGap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 5 volumes at face tubeInnerCover: 
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::fGap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'Pixel::NegativeEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'Pixel::Barrel'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'Pixel::PositiveEndcap'
+15:41:25    CylinderVolu   VERBOSE      -> volume 'SCT::sGap'
+15:41:25    CylinderVolu   VERBOSE   [GV] Register 3 volumes at face tubeOuterCover:
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::NegativeEndcap
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::Barrel
+15:41:25    CylinderVolu   VERBOSE      -> volume 'TRT::PositiveEndcap
+15:41:25    CylinderVolu   VERBOSE   [ end ] return newly created container : { { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } | { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } } }
+15:41:25    CylinderVolu   VERBOSE        with bounds : Acts::CylinderVolumeBounds: (rMin, rMax, halfZ, halfPhi, averagePhi, minBevelZ, maxBevelZ) = 0.00000, 1070.44496, 2745.57500, 3.14159, 0.00000, 0.00000, 0.00000
+central wrapping returned here
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=1, name: { { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap } | { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } } }
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=2, name: { SCT::fGap | { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap } | SCT::sGap }
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=3, name: SCT::fGap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=3|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=3|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=3|lay=3
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=4, name: { Pixel::NegativeEndcap | Pixel::Barrel | Pixel::PositiveEndcap }
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=5, name: Pixel::NegativeEndcap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=5|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=5|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=5|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=5|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=5|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=5|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=5|lay=7
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=6, name: Pixel::Barrel
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=7
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=8
+15:41:25    TrackerGeome   DEBUG     layerID: vol=6|lay=9
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=7, name: Pixel::PositiveEndcap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=7|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=7|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=7|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=7|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=7|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=7|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=7|lay=7
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=8, name: SCT::sGap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=8|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=8|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=8|lay=3
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=9, name: { { SCT::NegativeEndcap | TRT::NegativeEndcap } | { SCT::Barrel | TRT::Barrel } | { SCT::PositiveEndcap | TRT::PositiveEndcap } }
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=10, name: { SCT::NegativeEndcap | TRT::NegativeEndcap }
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=11, name: SCT::NegativeEndcap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=7
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=8
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=9
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=10
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=11
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=12
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=13
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=14
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=15
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=16
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=17
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=18
+15:41:25    TrackerGeome   DEBUG     layerID: vol=11|lay=19
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=12, name: TRT::NegativeEndcap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=7
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=8
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=9
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=10
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=11
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=12
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=13
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=14
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=15
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=16
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=17
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=18
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=19
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=20
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=21
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=22
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=23
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=24
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=25
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=26
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=27
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=28
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=29
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=30
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=31
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=32
+15:41:25    TrackerGeome   DEBUG     layerID: vol=12|lay=33
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=13, name: { SCT::Barrel | TRT::Barrel }
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=14, name: SCT::Barrel
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=7
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=8
+15:41:25    TrackerGeome   DEBUG     layerID: vol=14|lay=9
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=15, name: TRT::Barrel
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=7
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=8
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=9
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=10
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=11
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=12
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=13
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=14
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=15
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=16
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=17
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=18
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=19
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=20
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=21
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=22
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=23
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=24
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=25
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=26
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=27
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=28
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=29
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=30
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=31
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=32
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=33
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=34
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=35
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=36
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=37
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=38
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=39
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=40
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=41
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=42
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=43
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=44
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=45
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=46
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=47
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=48
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=49
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=50
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=51
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=52
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=53
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=54
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=55
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=56
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=57
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=58
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=59
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=60
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=61
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=62
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=63
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=64
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=65
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=66
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=67
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=68
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=69
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=70
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=71
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=72
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=73
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=74
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=75
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=76
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=77
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=78
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=79
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=80
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=81
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=82
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=83
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=84
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=85
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=86
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=87
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=88
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=89
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=90
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=91
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=92
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=93
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=94
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=95
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=96
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=97
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=98
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=99
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=100
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=101
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=102
+15:41:25    TrackerGeome   DEBUG     layerID: vol=15|lay=103
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=16, name: { SCT::PositiveEndcap | TRT::PositiveEndcap }
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=17, name: SCT::PositiveEndcap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=7
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=8
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=9
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=10
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=11
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=12
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=13
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=14
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=15
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=16
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=17
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=18
+15:41:25    TrackerGeome   DEBUG     layerID: vol=17|lay=19
+15:41:25    TrackerGeome   DEBUG     volumeID: vol=18, name: TRT::PositiveEndcap
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=1
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=2
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=3
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=4
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=5
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=6
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=7
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=8
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=9
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=10
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=11
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=12
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=13
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=14
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=15
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=16
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=17
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=18
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=19
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=20
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=21
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=22
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=23
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=24
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=25
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=26
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=27
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=28
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=29
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=30
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=31
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=32
+15:41:25    TrackerGeome   DEBUG     layerID: vol=18|lay=33
