@@ -53,7 +53,7 @@ int propagationExample(int argc, char* argv[],
 
   // Now read the standard options
   auto logLevel = ActsExamples::Options::readLogLevel(vm);
-  std::cout<<"=====logLevel======"<<logLevel<<std::endl;
+  std::cout << "=====logLevel======" << logLevel << std::endl;
   // The geometry, material and decoration
   auto geometry = ActsExamples::Geometry::build(vm, detector);
   auto tGeometry = geometry.first;
@@ -85,10 +85,14 @@ int propagationExample(int argc, char* argv[],
     navCfg.resolvePassive = vm["prop-resolve-passive"].template as<bool>();
     navCfg.resolveSensitive = vm["prop-resolve-sensitive"].template as<bool>();
     // Acts::Navigator navigator(navCfg);
-    Acts::Navigator navigator(navCfg, Acts::getDefaultLogger("Navigator",Acts::Logging::Level::VERBOSE));
+    Acts::Navigator navigator(
+        navCfg,
+        Acts::getDefaultLogger("Navigator", Acts::Logging::Level::VERBOSE));
 
     // Propagator propagator(std::move(stepper), std::move(navigator));
-    Propagator propagator(std::move(stepper), std::move(navigator), Acts::getDefaultLogger("Propagator", Acts::Logging::Level::VERBOSE));
+    Propagator propagator(
+        std::move(stepper), std::move(navigator),
+        Acts::getDefaultLogger("Propagator", Acts::Logging::Level::VERBOSE));
 
     // Read the propagation config and create the algorithms
     auto pAlgConfig = ActsExamples::Options::readPropagationConfig(vm);

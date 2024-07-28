@@ -93,7 +93,7 @@ Acts::Result<Acts::Vector2> Acts::LineSurface::globalToLocal(
   // This check is also done for the `PlaneSurface` so I aligned the
   // `LineSurface` to do the same thing.
   if (std::abs(localPosition.z()) > std::abs(tolerance)) {
-    std::cout<<"=====LineSurface.cpp======"<<std::endl;
+    std::cout << "=====LineSurface.cpp======" << std::endl;
     return Result<Vector2>::failure(SurfaceError::GlobalPositionNotOnSurface);
   }
 
@@ -137,8 +137,8 @@ Acts::Vector3 Acts::LineSurface::normal(const GeometryContext& gctx,
                                         const Vector2& /*lpos*/) const {
   const auto& tMatrix = transform(gctx).matrix();
   return Vector3(tMatrix(0, 2), tMatrix(1, 2), tMatrix(2, 2));
-  //throw std::runtime_error(
-  //    "LineSurface: normal is undefined without known direction");
+  // throw std::runtime_error(
+  //     "LineSurface: normal is undefined without known direction");
 }
 
 const Acts::SurfaceBounds& Acts::LineSurface::bounds() const {

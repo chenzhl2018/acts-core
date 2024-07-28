@@ -133,7 +133,7 @@ Acts::Result<Acts::Vector2> Acts::CylinderSurface::globalToLocal(
   Transform3 inverseTrans(sfTransform.inverse());
   Vector3 loc3Dframe(inverseTrans * position);
   if (std::abs(perp(loc3Dframe) - bounds().get(CylinderBounds::eR)) > inttol) {
-    std::cout<<"=====CylinderSurface.cpp======"<<std::endl;
+    std::cout << "=====CylinderSurface.cpp======" << std::endl;
     return Result<Vector2>::failure(SurfaceError::GlobalPositionNotOnSurface);
   }
   return Result<Vector2>::success(

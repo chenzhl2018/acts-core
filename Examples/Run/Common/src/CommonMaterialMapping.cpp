@@ -204,9 +204,7 @@ int runMaterialMapping(int argc, char* argv[],
   // Append the Algorithm
   sequencer.addAlgorithm(mmAlg);
 
-
   if (not materialFileName.empty() and vm["output-root"].template as<bool>()) {
-
     if (mapSurface) {
       // Write the propagation steps as ROOT TTree
       ActsExamples::RootMaterialTrackWriter::Config matTrackWriterRootConfig;
@@ -221,8 +219,6 @@ int runMaterialMapping(int argc, char* argv[],
       sequencer.addWriter(matTrackWriterRoot);
     }
   }
-
-
 
   // Initiate the run
   sequencer.run();

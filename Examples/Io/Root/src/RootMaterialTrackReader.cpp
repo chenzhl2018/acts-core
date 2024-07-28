@@ -230,7 +230,7 @@ ActsExamples::ProcessCode ActsExamples::RootMaterialTrackReader::read(
       // std::cout<<"=====mtrackCollection[ib]====="<<std::endl;
       mtrackCollection[ib] = (std::move(rmTrack));
     }
-    
+
     // Write to the collection to the EventStore
     // ACTS_VERBOSE("====Write to the collection to the EventStore=====");
     m_outputMaterialTracks(context, std::move(mtrackCollection));

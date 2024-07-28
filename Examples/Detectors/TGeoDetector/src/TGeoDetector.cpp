@@ -97,7 +97,7 @@ std::vector<Acts::TGeoLayerBuilder::Config> makeLayerBuilderConfigs(
       auto rR = volume.rRange.at(ncp);
       auto rMin = rR.lower.value_or(0.);
       auto rMax = rR.upper.value_or(std::numeric_limits<double>::max());
-      std::cout<<"=====rMin: "<<rMin<<" =====rMax: "<<rMax<<std::endl;
+      std::cout << "=====rMin: " << rMin << " =====rMax: " << rMax << std::endl;
       auto zR = volume.zRange.at(ncp);
       auto zMin = zR.lower.value_or(-std::numeric_limits<double>::max());
       auto zMax = zR.upper.value_or(std::numeric_limits<double>::max());
