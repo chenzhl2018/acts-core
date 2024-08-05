@@ -322,8 +322,8 @@ struct WrappingConfig {
           wCondition = Wrapping;
           wConditionScreen = "[fully wrapped]";
 
-          // std::cout<<"WARNING: [fully wrapped] manually set the SCT barrel
-          // rMax to 550 mm " << std::endl; cVolumeConfig.rMax = 550;
+           std::cout<<"WARNING: [fully wrapped] manually set the SCT barrel rMax to 550 mm " << std::endl; 
+	  cVolumeConfig.rMax = 550;
         } else if (existingVolumeConfig.rMin > containerVolumeConfig.rMax) {
           // full insertion case
           // set the rMax
@@ -377,8 +377,8 @@ struct WrappingConfig {
           wCondition = CentralWrapping;
           wConditionScreen = "[CentralWrapping]";
 
-          // std::cout<<"WARNING: [CentralWrapping] manually set the TRT barrel
-          // rMin to 550 mm " << std::endl; cVolumeConfig.rMin = 550;
+          std::cout<<"WARNING: [CentralWrapping] manually set the TRT barrel rMin to 550 mm " << std::endl; 
+	  cVolumeConfig.rMin = 550;
         } else if ((existingVolumeConfig.rMax > containerVolumeConfig.rMin &&
                     existingVolumeConfig.rMin < containerVolumeConfig.rMin) ||
                    (existingVolumeConfig.rMax > containerVolumeConfig.rMax &&
